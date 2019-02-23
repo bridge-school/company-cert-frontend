@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import EventIcon from '@material-ui/icons/Event';
 
 /* eslint-disable */
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
@@ -48,7 +49,9 @@ export class CompanyForm extends Component {
 							value={selectedDate} 
 							onChange={this.handleDateChange}
 							format="dd/MM/yyyy"
-							margin="normal" 
+							margin="normal"
+							keyboard
+							keyboardIcon={<EventIcon />} 
 						/>
 					</MuiPickersUtilsProvider>
 				</FormGroup>
