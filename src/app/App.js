@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../assets/App.css';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from '././components/Header';
 
@@ -9,8 +9,9 @@ import routes from './router/routes';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header title="Home"/>
+      <Router>
+        <div className="App">
+          <Header title="Home"/>
           <Switch>
             {
               routes.map(({path, component, exact}, i) => {
@@ -18,7 +19,8 @@ class App extends Component {
               })
             }
           </Switch>
-      </div>
+        </div>
+      </Router> 
     );
   }
 }
