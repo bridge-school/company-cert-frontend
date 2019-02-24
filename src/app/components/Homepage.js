@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import { CompanyForm } from '../containers/CompanyForm';
 
 
-export const Homepage = () => {
+const Homepage = () => {
 	return (
 		<Grid 
 			container
@@ -18,3 +18,5 @@ export const Homepage = () => {
 		</Grid>
 	);
 }
+
+export default Homepage;

@@ -12,6 +12,8 @@ import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { Link } from "react-router-dom";
+
 const styles = {
   grow: {
     flexGrow: 1,
@@ -25,7 +27,7 @@ const ButtonAppBar = ({ title, classes: { grow, headerLogo } }) => {
   const [anchor, setAnchor] = useState(null);
   return (
     <div className={grow}>
-    <AppBar position="fixed" color="fff" >
+    <AppBar position="fixed" color="inherit" >
       <Toolbar>
         <img className={headerLogo} src={logo} alt="Bridge" />
         <Typography variant="h6" color="inherit" className={grow}>
@@ -47,9 +49,21 @@ const ButtonAppBar = ({ title, classes: { grow, headerLogo } }) => {
           open={Boolean(anchor)}
           onClose={() => setAnchor(null)}
         >
-          <MenuItem onClick={() => setAnchor(null)}>Add Company</MenuItem>
-          <MenuItem onClick={() => setAnchor(null)}>Companies</MenuItem>
-          <MenuItem onClick={() => setAnchor(null)}>Add Student</MenuItem>
+        <Link to='/'>
+          <MenuItem onClick={() => setAnchor(null)}>
+            Add Company
+          </MenuItem>
+        </Link>
+        <Link to='/companies'>
+          <MenuItem onClick={() => setAnchor(null)}>
+            Browses Companies
+          </MenuItem>
+        </Link>
+        <Link to='/student'>
+          <MenuItem onClick={() => setAnchor(null)}>
+            Add Student
+          </MenuItem>
+        </Link>
         </Menu>
       </Toolbar>
     </AppBar>
