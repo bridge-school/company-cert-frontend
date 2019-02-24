@@ -16,11 +16,17 @@ export class CompanyForm extends Component {
 		super(props);
 
 		this.state = {
+			companyName: '',
 			selectedDate: new Date(),
 		};
 
 		// Bindings
+		this.handleNameChange = this.handleNameChange.bind(this);
 		this.handleDateChange = this.handleDateChange.bind(this);
+	}
+
+	handleNameChange = event => {
+		this.setState({ companyName: event.target.value })
 	}
 
 	handleDateChange = date => {
@@ -37,8 +43,9 @@ export class CompanyForm extends Component {
 						required
 						id="company-name"
 						label="Company Name"
-						value=""
+						value={this.state.companyName}
 						margin="normal"
+						onChange={this.handleNameChange}
 					/>
 				</FormGroup>
 				<FormGroup>
