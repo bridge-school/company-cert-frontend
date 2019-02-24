@@ -13,11 +13,13 @@ class App extends Component {
         <div className="App">
           <Header title="Home"/>
           <Switch>
-            {
-              routes.map(({path, component, exact}, i) => {
-                return <Route key={i} exact={exact} path={path} component={component} />
-              })
-            }
+            <div className="wrapper">
+              {
+                routes.map(({path, component, exact}, i) => {
+                  return <Route key={i} exact={exact} path={path} component={component} />
+                })
+              }
+            </div>
           </Switch>
         </div>
       </Router> 

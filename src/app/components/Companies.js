@@ -1,9 +1,5 @@
 import React from 'react';
 
-const Companies = () => (
-    <div className="wrapper">
-        <h1>Companies</h1>
-    </div>
-)
+const Companies = () => <h1>Companies</h1>;
 
 export default Companies;
