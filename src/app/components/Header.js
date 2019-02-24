@@ -32,7 +32,6 @@ const ButtonAppBar = ({ title, classes: { grow, headerLogo } }) => {
             <img className={headerLogo} src={logo} alt="Bridge" />
           </Link>
           <Typography variant="h6" color="inherit" className={grow}>
-            {title}
           </Typography>
           <IconButton 
             aria-label="Menu"
