@@ -76,7 +76,7 @@ export class CompanyForm extends Component {
 						/>
 					</MuiPickersUtilsProvider>
 				</FormGroup>
-				<FormControl margin="normal" style={{display: "block", textAlign: "left"}}>
+				<FormControl margin="normal" style={{display: "block"}}>
           <FormLabel component="legend">Company Checklist</FormLabel>
           <FormGroup>
 						{checklistData.map((value, index) => (
