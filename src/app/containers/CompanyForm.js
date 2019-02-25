@@ -17,6 +17,8 @@ import { DatePicker } from 'material-ui-pickers';
 
 import { checklistData } from '../../assets/checklistData';
 
+import firebase from 'firebase';
+
 export class CompanyForm extends Component {
 	constructor(props) {
 		super(props);
@@ -31,7 +33,9 @@ export class CompanyForm extends Component {
 		this.handleNameChange = this.handleNameChange.bind(this);
 		this.handleDateChange = this.handleDateChange.bind(this);
 		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 	}
+
 
 	handleNameChange = event => {
 		this.setState({ companyName: event.target.value })
@@ -47,11 +51,31 @@ export class CompanyForm extends Component {
 		this.setState({ score: scoreCount });
 	};
 
+	handleFormSubmit = e => {
+		e.preventDefault();
+		const firestore = firebase.firestore();
+		const docRef = firestore.collection('companies');
+		const dataToSave = this.state;
+
+		docRef.add({
+			...dataToSave
+		})
+		.then(()=>console.log('saved!'))
+		.catch(()=>console.log('Got and error: ' , error))
+
+		//Watch data update, and log it. 
+		docRef.get().then(querySnapshot => {
+			querySnapshot.forEach((doc) => {
+				console.log(`${doc.id}: =>`, doc.data());
+			});
+		})
+	};
+
 	render() {
 		const { selectedDate } = this.state;
 
 		return (
-			<form noValidate autoComplete="off">
+			<form noValidate autoComplete="off" onSubmit={this.handleFormSubmit}>
 				<FormGroup>
 					<TextField
 						required
