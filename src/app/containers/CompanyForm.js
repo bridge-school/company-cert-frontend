@@ -18,86 +18,81 @@ import { DatePicker } from 'material-ui-pickers';
 import { checklistData } from '../../assets/checklistData';
 
 export class CompanyForm extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			companyName: '',
-			selectedDate: new Date(),
-			score: 0,
-		};
+    this.state = {
+      companyName: '',
+      selectedDate: new Date(),
+      score: 0
+    };
 
-		// Bindings
-		this.handleNameChange = this.handleNameChange.bind(this);
-		this.handleDateChange = this.handleDateChange.bind(this);
-		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-	}
+    // Bindings
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+  }
 
-	handleNameChange = event => {
-		this.setState({ companyName: event.target.value })
-	}
+  handleNameChange = event => {
+    this.setState({ companyName: event.target.value });
+  };
 
-	handleDateChange = date => {
-		this.setState({ selectedDate: date });
-	};
+  handleDateChange = date => {
+    this.setState({ selectedDate: date });
+  };
 
-	handleCheckboxChange = val => {
-		let scoreCount = this.state.score;
-		val.target.checked ? scoreCount++ : scoreCount--;
-		this.setState({ score: scoreCount });
-	};
+  handleCheckboxChange = val => {
+    let scoreCount = this.state.score;
+    val.target.checked ? scoreCount++ : scoreCount--;
+    this.setState({ score: scoreCount });
+  };
 
-	render() {
-		const { selectedDate } = this.state;
+  render() {
+    const { selectedDate } = this.state;
 
-		return (
-			<form noValidate autoComplete="off">
-				<FormGroup>
-					<TextField
-						required
-						id="company-name"
-						label="Company Name"
-						value={this.state.companyName}
-						margin="normal"
-						onChange={this.handleNameChange}
-					/>
-				</FormGroup>
-				<FormGroup>
-					<MuiPickersUtilsProvider utils={DateFnsUtils}>
-						<DatePicker 
-							required
-							label="Interview Date"
-							value={selectedDate} 
-							onChange={this.handleDateChange}
-							format="dd/MM/yyyy"
-							margin="normal"
-							keyboard
-							keyboardIcon={<EventIcon />} 
-						/>
-					</MuiPickersUtilsProvider>
-				</FormGroup>
-				<FormControl margin="normal" style={{display: "block"}}>
+    return (
+      <form noValidate autoComplete="off">
+        <FormGroup>
+          <TextField
+            required
+            id="company-name"
+            label="Company Name"
+            value={this.state.companyName}
+            margin="normal"
+            onChange={this.handleNameChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker
+              required
+              label="Interview Date"
+              value={selectedDate}
+              onChange={this.handleDateChange}
+              format="dd/MM/yyyy"
+              margin="normal"
+              keyboard
+              keyboardIcon={<EventIcon />}
+            />
+          </MuiPickersUtilsProvider>
+        </FormGroup>
+        <FormControl margin="normal" style={{ display: 'block' }}>
           <FormLabel component="legend">Company Checklist</FormLabel>
           <FormGroup>
-						{checklistData.map((value, index) => (
-            	<FormControlLabel
-								key={index}
-            	  control={
-									<Checkbox
-										value={index.toString()}
-										onChange={this.handleCheckboxChange}
-									/>
-            	  }
-            	  label={value}
-            	/>
-						))}
+            {checklistData.map((value, index) => (
+              <FormControlLabel
+                key={index}
+                control={<Checkbox value={index.toString()} onChange={this.handleCheckboxChange} />}
+                label={value}
+              />
+            ))}
           </FormGroup>
         </FormControl>
 
-				<Button type="submit" variant="contained" color="primary">
-					Submit
-				</Button>
-			</form>
-		);
-	}
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </form>
+    );
+  }
 }
