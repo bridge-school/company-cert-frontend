@@ -51,7 +51,8 @@ export class CompanyForm extends Component {
 		this.setState({ score: scoreCount });
 	};
 
-	handleFormSubmit = e => {
+	// This is the submit funtion the pushes data 
+	handleFormSubmit2 = e => {
 		e.preventDefault();
 		const firestore = firebase.firestore();
 		const docRef = firestore.collection('companies');
@@ -70,6 +71,13 @@ export class CompanyForm extends Component {
 			});
 		})
 	};
+
+	//this is the function that's using BE endpoint, only getting the data
+	handleFormSubmit = e =>{
+		e.preventDefault();
+		fetch("companies")
+		.then(res=>console.log(res))
+	}
 
 	render() {
 		const { selectedDate } = this.state;
