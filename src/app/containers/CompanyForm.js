@@ -45,13 +45,21 @@ export class CompanyForm extends Component {
     let scoreCount = this.state.score;
     val.target.checked ? scoreCount++ : scoreCount--;
     this.setState({ score: scoreCount });
-  };
+	};
+	
+	//this is the function that's using BE endpoint, only getting the data
+	//makesure your backend project is running
+	handleFormSubmit = e => {
+		e.preventDefault();
+		fetch("companies")
+			.then(res => console.log(res))
+	}
 
   render() {
     const { selectedDate } = this.state;
 
     return (
-      <form noValidate autoComplete="off">
+			<form noValidate autoComplete="off" onSubmit={this.handleFormSubmit}>
         <FormGroup>
           <TextField
             required
@@ -77,6 +85,7 @@ export class CompanyForm extends Component {
           </MuiPickersUtilsProvider>
         </FormGroup>
         <FormControl margin="normal" style={{ display: 'block' }}>
+
           <FormLabel component="legend">Company Checklist</FormLabel>
           <FormGroup>
             {checklistData.map((value, index) => (
