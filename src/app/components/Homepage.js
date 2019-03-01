@@ -2,7 +2,7 @@ import React from 'react';
 
 import Grid from '@material-ui/core/Grid';
 
-import { CompanyForm } from '../containers/CompanyForm';
+import CompanyForm from '../containers/CompanyForm';
 
 const Homepage = () => {
   return (
