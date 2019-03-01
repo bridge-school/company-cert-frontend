@@ -6,10 +6,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { Field } from 'redux-form';
 
 import CompanyChecklist from './CompanyChecklist';
-// import checklistData from '../../../assets/checklistData';
 
 const CompanyChecklistWrapper = ({ input, checklistData }) => {
-  // debugger
   return (
     <FormControl margin="normal" style={{ display: 'block' }}>
       <FormLabel component="legend">Company Checklist</FormLabel>

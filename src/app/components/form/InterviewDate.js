@@ -15,7 +15,6 @@ const InterviewDate = ({ label, input, meta: { touched, invalid, error } }) => {
         <DatePicker
           label={label}
           {...input}
-          // value={selectedDate}
           onChange={input.onChange}
           format="dd/MM/yyyy"
           margin="normal"
