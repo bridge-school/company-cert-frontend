@@ -7,6 +7,7 @@ const CompanyName = ({ label, input, meta: { touched, invalid, error } }) => {
   return (
     <FormGroup>
       <TextField
+        required
         id="company-name"
         label={label}
         {...input}

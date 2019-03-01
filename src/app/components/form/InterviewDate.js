@@ -13,6 +13,7 @@ const InterviewDate = ({ label, input, meta: { touched, invalid, error } }) => {
     <FormGroup>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <DatePicker
+          required
           label={label}
           {...input}
           onChange={input.onChange}
