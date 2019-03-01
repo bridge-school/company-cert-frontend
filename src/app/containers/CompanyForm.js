@@ -26,10 +26,10 @@ class CompanyForm extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, pristine, submitting, invalid } = this.props;
 
     return (
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <Field name="companyName" component={CompanyName} label="First Name" />
 
         <Field name="interviewDate" component={InterviewDate} label="Interview Date" />
@@ -40,7 +40,7 @@ class CompanyForm extends Component {
           checklistData={checklistData}
         />
 
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" disabled={pristine || submitting || invalid}>
           Submit
         </Button>
       </form>
