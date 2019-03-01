@@ -26,7 +26,7 @@ class CompanyForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting, classes } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
