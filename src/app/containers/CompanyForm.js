@@ -12,7 +12,6 @@ import validate from '../validations';
 class CompanyForm extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
@@ -21,7 +20,7 @@ class CompanyForm extends Component {
 
     return (
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <Field name="companyName" component={CompanyName} label="First Name" />
+        <Field name="companyName" component={CompanyName} label="Company Name" />
 
         <Field name="interviewDate" component={InterviewDate} label="Interview Date" />
 
@@ -51,7 +50,10 @@ const onSubmit = (values, dispatch) => {
 const CompanyReduxForm = reduxForm({
   form: 'CompanyForm', // a unique identifier for this form
   validate,
-  onSubmit
+  onSubmit,
+  initialValues: {
+    interviewDate: new Date()
+  },
 })(CompanyForm);
 
 export default CompanyReduxForm;
