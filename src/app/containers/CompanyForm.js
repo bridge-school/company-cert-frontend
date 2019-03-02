@@ -7,17 +7,8 @@ import InterviewDate from '../components/form/InterviewDate';
 import CompanyChecklistWrapper from '../components/form/CompanyChecklistWrapper';
 import submitCompanyForm from '../store/actions/submitCompanyForm';
 import checklistData from '../../assets/checklistData';
+import validate from '../validations';
 
-const validate = values => {
-  const errors = {};
-  const requiredFields = ['companyName', 'interviewDate'];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required';
-    }
-  });
-  return errors;
-};
 class CompanyForm extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +31,12 @@ class CompanyForm extends Component {
           checklistData={checklistData}
         />
 
-        <Button type="submit" variant="contained" color="primary" disabled={pristine || submitting || invalid}>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={pristine || submitting || invalid}
+        >
           Submit
         </Button>
       </form>
