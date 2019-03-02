@@ -12,6 +12,7 @@ import validate from '../validations';
 class CompanyForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {
