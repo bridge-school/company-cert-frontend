@@ -8,11 +8,14 @@ import store from '../store/store';
 
 import { Redirect } from 'react-router-dom';
 
-const Homepage = ({companyId, postSuccess}) => {
+import { resetAction } from '../store/actions/submitCompanyForm'
+
+const Homepage = ({companyId, postSuccess, reset}) => {
 
   useEffect(() => {
     return () => {
       console.log('Unmounting');
+      reset();
     };
   });
 
@@ -29,6 +32,10 @@ const Homepage = ({companyId, postSuccess}) => {
   );
 };
 
+const mapDispatchToProps = {
+  reset: resetAction
+}
+
 const mapStateToProps = ({ companyReducer: {postSuccess, companyId} }) => {
   return {
     postSuccess,
@@ -36,5 +43,5 @@ const mapStateToProps = ({ companyReducer: {postSuccess, companyId} }) => {
   };
 };
 
-export default connect(mapStateToProps)(Homepage);
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
 

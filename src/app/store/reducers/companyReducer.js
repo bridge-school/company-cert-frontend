@@ -1,4 +1,4 @@
-import { POST_COMPANY_SUCCESS, POST_COMPANY_FAILURE } from '../constants';
+import { POST_COMPANY_SUCCESS, POST_COMPANY_FAILURE, RESET_COMPANY_DATA } from '../constants';
 
 const initialState = {
   postSuccess: false,
@@ -19,7 +19,7 @@ const companyReducer = (state = initialState, {type, payload} ) => {
         postSuccess: false,
         companyId: null
       }
-    case POST_COMPANY_RESET:
+    case RESET_COMPANY_DATA:
       return initialState
     default: 
       return state;

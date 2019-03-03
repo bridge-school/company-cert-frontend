@@ -33,7 +33,7 @@ const postFailureAction = data => ({
   payload: data
 })
 
-const resetAction = () => ({
+export const resetAction = () => ({
   type: RESET_COMPANY_DATA
 })
 
