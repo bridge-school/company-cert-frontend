@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/App';
-import store from './app/store/store'
+import store from './app/store/store';
+import { Provider } from 'react-redux';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
