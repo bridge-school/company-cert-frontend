@@ -17,7 +17,7 @@ const Homepage = ({companyId, postSuccess, reset}) => {
       console.log('Unmounting');
       reset();
     };
-  });
+  }, []);
 
   return (
     <Grid container justify="center">
