@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Grid from '@material-ui/core/Grid';
-import { Provider } from 'react-redux';
+import { Provider, connect} from 'react-redux';
 
 import CompanyForm from '../containers/CompanyForm';
 import store from '../store/store';
 
-const Homepage = () => {
+import { Redirect } from 'react-router-dom';
+
+const Homepage = ({companyId, postSuccess}) => {
+
+  useEffect(() => {
+    return () => {
+      console.log('Unmounting');
+    };
+  });
+
   return (
     <Grid container justify="center">
       <Grid item xs={10} sm={8} md={6}>
@@ -15,8 +24,17 @@ const Homepage = () => {
           <CompanyForm />
         </Provider>
       </Grid>
+    { postSuccess && <Redirect to={`/companies/${companyId}`}/> }
     </Grid>
   );
 };
 
-export default Homepage;
+const mapStateToProps = ({ companyReducer: {postSuccess, companyId} }) => {
+  return {
+    postSuccess,
+    companyId,
+  };
+};
+
+export default connect(mapStateToProps)(Homepage);
+

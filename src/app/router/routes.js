@@ -11,6 +11,7 @@ const routes = [
   },
   {
     path: '/companies',
+    exact: true,
     component: Companies
   },
   {
@@ -18,7 +19,7 @@ const routes = [
     component: Student
   },
   {
-    path: '/company',
+    path: '/companies/:id',
     component: Company
   }
 ];
