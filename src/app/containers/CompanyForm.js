@@ -48,6 +48,16 @@ const onSubmit = (values, dispatch) => {
   dispatch(submitCompanyForm(values));
 };
 
+const mapStateToProps = (state) => {
+  return ({
+    checklist: state.frontendData.checklist,
+    tech: state.frontendData.tech,
+    industry: state.frontendData.industry
+  })
+};
+
+CompanyForm = connect(mapStateToProps)(CompanyForm);
+
 const CompanyReduxForm = reduxForm({
   form: 'CompanyForm', // a unique identifier for this form
   validate,
