@@ -12,14 +12,16 @@ const CompanyChecklistWrapper = ({ input, checklistData }) => {
     <FormControl margin="normal" style={{ display: 'block' }}>
       <FormLabel component="legend">Company Checklist</FormLabel>
       <FormGroup>
-        {checklistData.map((value, index) => (
-          <Field
-            key={index}
-            name={`companyChecklist.${value.id}`}
-            component={CompanyChecklist}
-            label={value.name}
-          />
-        ))}
+        { checklistData === undefined || checklistData.length === 0 ? <p>Loading...</p> :
+          checklistData.map((value, index) => (
+            <Field
+              key={index}
+              name={`companyChecklist.${value.id}`}
+              component={CompanyChecklist}
+              label={value.name}
+            />
+          ))
+        }
       </FormGroup>
     </FormControl>
   );

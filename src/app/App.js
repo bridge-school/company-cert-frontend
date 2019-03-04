@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import '../assets/App.css';
 
 import Header from './components/Header';
 
 import Main from './components/Main';
+import updateFrontendData from './store/actions/updateFrontendData';
+
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.updateFrontendData();
+  }
+
   render() {
     return (
       <Router>
@@ -19,4 +28,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  updateFrontendData
+}
+
+export default connect(null,mapDispatchToProps)(App);
