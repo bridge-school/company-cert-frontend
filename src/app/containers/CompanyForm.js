@@ -8,7 +8,6 @@ import CompanyName from '../components/form/CompanyName';
 import InterviewDate from '../components/form/InterviewDate';
 import CompanyChecklistWrapper from '../components/form/CompanyChecklistWrapper';
 import submitCompanyForm from '../store/actions/submitCompanyForm';
-import checklistData from '../../assets/checklistData';
 import validate from '../validations';
 
 class CompanyForm extends Component {
@@ -16,6 +15,7 @@ class CompanyForm extends Component {
     super(props);
     this.state = {};
   }
+
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props;
@@ -29,7 +29,7 @@ class CompanyForm extends Component {
         <Field
           name="companyChecklist"
           component={CompanyChecklistWrapper}
-          checklistData={checklistData}
+          checklistData={this.props.checklist}
         />
 
         <Button
