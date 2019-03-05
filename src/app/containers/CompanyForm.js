@@ -10,15 +10,16 @@ import CompanyChecklistWrapper from '../components/form/CompanyChecklistWrapper'
 import submitCompanyForm from '../store/actions/submitCompanyForm';
 import validate from '../validations';
 
+import Dropdown from '../components/form/Dropdown';
+
 class CompanyForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-
   render() {
-    const { handleSubmit, pristine, submitting, invalid } = this.props;
+    const { handleSubmit, pristine, submitting, invalid, onBlur } = this.props;
 
     return (
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -30,6 +31,15 @@ class CompanyForm extends Component {
           name="companyChecklist"
           component={CompanyChecklistWrapper}
           checklistData={this.props.checklist}
+        />
+        
+        <Field 
+          name="Industry"
+          component={Dropdown} 
+          label="Industry" 
+          placeholder="Choose your industry interests"
+          multi
+          suggestions={[{label: 'Test1', value: '1'}, {label: 'Test2', value: '2'}]}
         />
 
         <Button
