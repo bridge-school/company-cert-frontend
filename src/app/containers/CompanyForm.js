@@ -19,7 +19,7 @@ class CompanyForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, invalid, onBlur } = this.props;
+    const { handleSubmit, pristine, submitting, invalid } = this.props;
 
     return (
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -34,12 +34,21 @@ class CompanyForm extends Component {
         />
         
         <Field 
-          name="Industry"
+          name="industry"
           component={Dropdown} 
           label="Industry" 
-          placeholder="Choose your industry interests"
+          placeholder="Choose related industries"
           multi
-          suggestions={[{label: 'Test1', value: '1'}, {label: 'Test2', value: '2'}]}
+          suggestions={this.props.tech.map(item => ({label: item.name, value: item.id}))}
+        />
+
+        <Field 
+          name="tech"
+          component={Dropdown} 
+          label="Technology" 
+          placeholder="Choose related technologies"
+          multi
+          suggestions={this.props.industry.map(item => ({label: item.name, value: item.id}))}
         />
 
         <Button

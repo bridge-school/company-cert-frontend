@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types, react/jsx-handler-names */
 
-import React, { Component } from "react";
+// Credit to https://material-ui.com/demos/autocomplete/
+import React from "react";
 import classNames from "classnames";
 import Select from "react-select";
 import { withStyles } from "@material-ui/core/styles";
@@ -16,6 +17,7 @@ import { FormGroup } from "@material-ui/core";
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    margin: `${theme.spacing.unit * 2}px 0`
   },
   input: {
     display: "flex",
@@ -62,23 +64,20 @@ const styles = theme => ({
   }
 });
 
-function NoOptionsMessage(props) {
-  return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.noOptionsMessage}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
-}
+const NoOptionsMessage = props => (
+  <Typography
+    color="textSecondary"
+    className={props.selectProps.classes.noOptionsMessage}
+    {...props.innerProps}
+  >
+    {props.children}
+  </Typography>
+);
 
-function inputComponent({ inputRef, ...props }) {
-  return <div ref={inputRef} {...props} />;
-}
 
-function Control(props) {
+const inputComponent = ({ inputRef, ...props }) => <div ref={inputRef} {...props} />
+
+const Control = (props) => {
   return (
     <TextField
       fullWidth
@@ -96,78 +95,70 @@ function Control(props) {
   );
 }
 
-function Option(props) {
-  return (
-    <MenuItem
-      buttonRef={props.innerRef}
-      selected={props.isFocused}
-      component="div"
-      style={{
-        fontWeight: props.isSelected ? 500 : 400
-      }}
-      {...props.innerProps}
-    >
-      {props.children}
-    </MenuItem>
-  );
-}
+const Option = props =>  (
+  <MenuItem
+    buttonRef={props.innerRef}
+    selected={props.isFocused}
+    component="div"
+    style={{
+      fontWeight: props.isSelected ? 500 : 400
+    }}
+    {...props.innerProps}
+  >
+    {props.children}
+  </MenuItem>
+);
 
-function Placeholder(props) {
-  return (
-    <Typography
-      color="textSecondary"
-      className={props.selectProps.classes.placeholder}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
-}
+const Placeholder = props => (
+  <Typography
+    color="textSecondary"
+    className={props.selectProps.classes.placeholder}
+    {...props.innerProps}
+  >
+    {props.children}
+  </Typography>
+);
 
-function SingleValue(props) {
-  return (
-    <Typography
-      className={props.selectProps.classes.singleValue}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
-}
+const SingleValue = props => (
+  <Typography
+    className={props.selectProps.classes.singleValue}
+    {...props.innerProps}
+  >
+    {props.children}
+  </Typography>
+);
 
-function ValueContainer(props) {
-  return (
-    <div className={props.selectProps.classes.valueContainer}>
-      {props.children}
-    </div>
-  );
-}
 
-function MultiValue(props) {
-  return (
-    <Chip
-      tabIndex={-1}
-      label={props.children}
-      className={classNames(props.selectProps.classes.chip, {
-        [props.selectProps.classes.chipFocused]: props.isFocused
-      })}
-      onDelete={props.removeProps.onClick}
-      deleteIcon={<CancelIcon {...props.removeProps} />}
-    />
-  );
-}
+const ValueContainer = props => (
+  <div className={props.selectProps.classes.valueContainer}>
+    {props.children}
+  </div>
+);
 
-function Menu(props) {
-  return (
-    <Paper
-      square
-      className={props.selectProps.classes.paper}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Paper>
-  );
-}
+
+const MultiValue = props => (
+  <Chip
+    tabIndex={-1}
+    label={props.children}
+    className={classNames(props.selectProps.classes.chip, {
+      [props.selectProps.classes.chipFocused]: props.isFocused
+    })}
+    onDelete={props.removeProps.onClick}
+    deleteIcon={<CancelIcon {...props.removeProps} />}
+  />
+);
+
+
+const Menu = props => (
+  <Paper
+    square
+    className={props.selectProps.classes.paper}
+    {...props.innerProps}
+  >
+    {props.children}
+  </Paper>
+);
+
 
 const components = {
   Control,
@@ -180,53 +171,41 @@ const components = {
   ValueContainer
 };
 
-class IntegrationReactSelect extends Component {
-  state = {
-    value: []
-  };
-
-  handleChange = () => value => {
-    this.setState({
-      value
-    });
-  };
+const IntegrationReactSelect = ({ classes, theme, suggestions, label, placeholder, input }) => {
   
-  render() {
-    const { classes, theme, suggestions, label, placeholder, input } = this.props;
+  const selectStyles = {
+    input: base => ({
+      ...base,
+      color: theme.palette.text.primary,
+      "& input": {
+        font: "inherit"
+      }
+    })
+  };
 
-    const selectStyles = {
-      input: base => ({
-        ...base,
-        color: theme.palette.text.primary,
-        "& input": {
-          font: "inherit"
-        }
-      })
-    };
+  return (
+    <FormGroup>
+      <div className={classes.root}>
+        <Select
+          classes={classes}
+          styles={selectStyles}
+          textFieldProps={{
+          label: label,
+          InputLabelProps: {
+              shrink: true
+            }
+          }}
+          {...input}
+          options={suggestions}
+          components={components}
+          onBlur={() => { input.onBlur([...input.value])}}
+          placeholder={placeholder}
+          isMulti
+        />
+      </div>
+    </FormGroup>
+  );
+} 
 
-    return (
-      <FormGroup>
-        <div className={classes.root}>
-          <Select
-            classes={classes}
-            styles={selectStyles}
-            textFieldProps={{
-            label: label,
-            InputLabelProps: {
-                shrink: true
-              }
-            }}
-            {...input}
-            options={suggestions}
-            components={components}
-            onBlur={() => { input.onBlur([...input.value])}}
-            placeholder={placeholder}
-            isMulti
-          />
-        </div>
-      </FormGroup>
-    );
-  } 
-}
 
 export default withStyles(styles, { withTheme: true })(IntegrationReactSelect);
