@@ -12,7 +12,9 @@ const CompanyChecklistWrapper = ({ input, checklistData }) => {
     <FormControl margin="normal" style={{ display: 'block' }}>
       <FormLabel component="legend">Company Checklist</FormLabel>
       <FormGroup>
-        { checklistData === undefined || checklistData.length === 0 ? <p>Loading...</p> :
+        {checklistData === undefined || checklistData.length === 0 ? (
+          <p>Loading...</p>
+        ) : (
           checklistData.map((value, index) => (
             <Field
               key={index}
@@ -21,7 +23,7 @@ const CompanyChecklistWrapper = ({ input, checklistData }) => {
               label={value.name}
             />
           ))
-        }
+        )}
       </FormGroup>
     </FormControl>
   );
