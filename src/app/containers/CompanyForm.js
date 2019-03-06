@@ -10,12 +10,13 @@ import CompanyChecklistWrapper from '../components/form/CompanyChecklistWrapper'
 import submitCompanyForm from '../store/actions/submitCompanyForm';
 import validate from '../validations';
 
+import Dropdown from '../components/form/Dropdown';
+
 class CompanyForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props;
@@ -30,6 +31,24 @@ class CompanyForm extends Component {
           name="companyChecklist"
           component={CompanyChecklistWrapper}
           checklistData={this.props.checklist}
+        />
+        
+        <Field 
+          name="industry"
+          component={Dropdown} 
+          label="Industry" 
+          placeholder="Choose related industries"
+          multi
+          suggestions={this.props.tech.map(item => ({label: item.name, value: item.id}))}
+        />
+
+        <Field 
+          name="tech"
+          component={Dropdown} 
+          label="Technology" 
+          placeholder="Choose related technologies"
+          multi
+          suggestions={this.props.industry.map(item => ({label: item.name, value: item.id}))}
         />
 
         <Button
