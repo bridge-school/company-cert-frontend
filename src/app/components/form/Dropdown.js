@@ -197,7 +197,6 @@ const IntegrationReactSelect = ({
           }}
           placeholder={placeholder}
           isMulti
-          //error={touched && invalid}
         />
         {touched && invalid && <span className={classes.hasError}>{error}</span>}
       </div>
