@@ -1,43 +1,44 @@
 /* eslint-disable react/prop-types, react/jsx-handler-names */
 
 // Credit to https://material-ui.com/demos/autocomplete/
-import React from "react";
-import classNames from "classnames";
-import Select from "react-select";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
-import MenuItem from "@material-ui/core/MenuItem";
-import CancelIcon from "@material-ui/icons/Cancel";
-import { emphasize } from "@material-ui/core/styles/colorManipulator";
-import { FormGroup } from "@material-ui/core";
+import React from 'react';
+import classNames from 'classnames';
+import Select from 'react-select';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Chip from '@material-ui/core/Chip';
+import MenuItem from '@material-ui/core/MenuItem';
+import CancelIcon from '@material-ui/icons/Cancel';
+import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import { FormGroup } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     margin: `${theme.spacing.unit * 2}px 0`
   },
+  hasError: {
+    color: 'red'
+  },
   input: {
-    display: "flex",
+    display: 'flex',
     padding: 0
   },
   valueContainer: {
-    display: "flex",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexWrap: 'wrap',
     flex: 1,
-    alignItems: "center",
-    overflow: "hidden"
+    alignItems: 'center',
+    overflow: 'hidden'
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
   },
   chipFocused: {
     backgroundColor: emphasize(
-      theme.palette.type === "light"
-        ? theme.palette.grey[300]
-        : theme.palette.grey[700],
+      theme.palette.type === 'light' ? theme.palette.grey[300] : theme.palette.grey[700],
       0.08
     )
   },
@@ -48,12 +49,12 @@ const styles = theme => ({
     fontSize: 16
   },
   placeholder: {
-    position: "absolute",
+    position: 'absolute',
     left: 2,
     fontSize: 16
   },
   paper: {
-    position: "absolute",
+    position: 'absolute',
     zIndex: 1,
     marginTop: theme.spacing.unit,
     left: 0,
@@ -74,10 +75,9 @@ const NoOptionsMessage = props => (
   </Typography>
 );
 
+const inputComponent = ({ inputRef, ...props }) => <div ref={inputRef} {...props} />;
 
-const inputComponent = ({ inputRef, ...props }) => <div ref={inputRef} {...props} />
-
-const Control = (props) => {
+const Control = props => {
   return (
     <TextField
       fullWidth
@@ -93,9 +93,9 @@ const Control = (props) => {
       {...props.selectProps.textFieldProps}
     />
   );
-}
+};
 
-const Option = props =>  (
+const Option = props => (
   <MenuItem
     buttonRef={props.innerRef}
     selected={props.isFocused}
@@ -120,21 +120,14 @@ const Placeholder = props => (
 );
 
 const SingleValue = props => (
-  <Typography
-    className={props.selectProps.classes.singleValue}
-    {...props.innerProps}
-  >
+  <Typography className={props.selectProps.classes.singleValue} {...props.innerProps}>
     {props.children}
   </Typography>
 );
 
-
 const ValueContainer = props => (
-  <div className={props.selectProps.classes.valueContainer}>
-    {props.children}
-  </div>
+  <div className={props.selectProps.classes.valueContainer}>{props.children}</div>
 );
-
 
 const MultiValue = props => (
   <Chip
@@ -148,17 +141,11 @@ const MultiValue = props => (
   />
 );
 
-
 const Menu = props => (
-  <Paper
-    square
-    className={props.selectProps.classes.paper}
-    {...props.innerProps}
-  >
+  <Paper square className={props.selectProps.classes.paper} {...props.innerProps}>
     {props.children}
   </Paper>
 );
-
 
 const components = {
   Control,
@@ -171,14 +158,21 @@ const components = {
   ValueContainer
 };
 
-const IntegrationReactSelect = ({ classes, theme, suggestions, label, placeholder, input }) => {
-  
+const IntegrationReactSelect = ({
+  classes,
+  theme,
+  suggestions,
+  label,
+  placeholder,
+  input,
+  meta: { touched, invalid, error }
+}) => {
   const selectStyles = {
     input: base => ({
       ...base,
       color: theme.palette.text.primary,
-      "& input": {
-        font: "inherit"
+      '& input': {
+        font: 'inherit'
       }
     })
   };
@@ -190,22 +184,25 @@ const IntegrationReactSelect = ({ classes, theme, suggestions, label, placeholde
           classes={classes}
           styles={selectStyles}
           textFieldProps={{
-          label: label,
-          InputLabelProps: {
+            label: label,
+            InputLabelProps: {
               shrink: true
             }
           }}
           {...input}
           options={suggestions}
           components={components}
-          onBlur={() => { input.onBlur([...input.value])}}
+          onBlur={() => {
+            input.onBlur([...input.value]);
+          }}
           placeholder={placeholder}
           isMulti
+          //error={touched && invalid}
         />
+        {touched && invalid && <span className={classes.hasError}>{error}</span>}
       </div>
     </FormGroup>
   );
-} 
-
+};
 
 export default withStyles(styles, { withTheme: true })(IntegrationReactSelect);
