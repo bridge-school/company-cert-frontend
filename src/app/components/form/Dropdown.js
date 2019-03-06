@@ -78,9 +78,11 @@ const NoOptionsMessage = props => (
 const inputComponent = ({ inputRef, ...props }) => <div ref={inputRef} {...props} />;
 
 const Control = props => {
+  console.log(props);
   return (
     <TextField
       fullWidth
+      error={props.selectProps.meta.touched && props.selectProps.meta.invalid}
       InputProps={{
         inputComponent,
         inputProps: {
@@ -134,7 +136,7 @@ const MultiValue = props => (
     tabIndex={-1}
     label={props.children}
     className={classNames(props.selectProps.classes.chip, {
-      [props.selectProps.classes.chipFocused]: props.isFocused
+      [props.selectProps.classes.chipFocused]: props.isFocused// true
     })}
     onDelete={props.removeProps.onClick}
     deleteIcon={<CancelIcon {...props.removeProps} />}
@@ -165,8 +167,9 @@ const IntegrationReactSelect = ({
   label,
   placeholder,
   input,
-  meta: { touched, invalid, error }
+  meta
 }) => {
+  const {  touched, invalid, error } = meta
   const selectStyles = {
     input: base => ({
       ...base,
@@ -186,7 +189,7 @@ const IntegrationReactSelect = ({
           textFieldProps={{
             label: label,
             InputLabelProps: {
-              shrink: true
+              shrink: !invalid
             }
           }}
           {...input}
@@ -195,10 +198,11 @@ const IntegrationReactSelect = ({
           onBlur={() => {
             input.onBlur([...input.value]);
           }}
-          placeholder={placeholder}
+          placeholder={''}
           isMulti
+          meta={meta}
         />
-        {touched && invalid && <span className={classes.hasError}>{error}</span>}
+        {/* {touched && invalid && <span className={classes.hasError}>{error}</span>} */}
       </div>
     </FormGroup>
   );
