@@ -9,9 +9,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import updateFrontendData from './store/actions/updateFrontendData';
 
-
 class App extends Component {
-
   componentDidMount() {
     this.props.updateFrontendData();
   }
@@ -30,6 +28,9 @@ class App extends Component {
 
 const mapDispatchToProps = {
   updateFrontendData
-}
+};
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);

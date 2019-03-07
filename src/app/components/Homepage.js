@@ -8,10 +8,9 @@ import CompanyForm from '../containers/CompanyForm';
 
 import { Redirect } from 'react-router-dom';
 
-import { resetAction } from '../store/actions/submitCompanyForm'
+import { resetAction } from '../store/actions/submitCompanyForm';
 
-const Homepage = ({companyId, postSuccess, reset}) => {
-
+const Homepage = ({ companyId, postSuccess, reset }) => {
   useEffect(() => {
     return () => {
       console.log('Unmounting');
@@ -25,21 +24,23 @@ const Homepage = ({companyId, postSuccess, reset}) => {
         <h1>Bridge Company Certification</h1>
         <CompanyForm />
       </Grid>
-    { postSuccess && <Redirect to={`/companies/${companyId}`}/> }
+      {postSuccess && <Redirect to={`/companies/${companyId}`} />}
     </Grid>
   );
 };
 
 const mapDispatchToProps = {
   reset: resetAction
-}
+};
 
-const mapStateToProps = ({ companyReducer: {postSuccess, companyId} }) => {
+const mapStateToProps = ({ company: { postSuccess, companyId } }) => {
   return {
     postSuccess,
-    companyId,
+    companyId
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Homepage);

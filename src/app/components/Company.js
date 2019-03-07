@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
   getCompanyData: companyId => dispatch(getCompanyData(companyId))
 });
 
-const mapStateToProps = ({ companyReducer: { getCompanySuccess, companyData, companyId } }) => {
+const mapStateToProps = ({ company: { getCompanySuccess, companyData, companyId } }) => {
   return {
     getCompanySuccess,
     companyData,
