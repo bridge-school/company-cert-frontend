@@ -1,11 +1,18 @@
 const validate = values => {
   const errors = {};
-  const requiredFields = ['companyName', 'interviewDate', 'industry', 'tech'];
+  const requiredFields = ['companyName', 'interviewDate'];
   requiredFields.forEach(field => {
-    if (!values[field] || values[field].length < 1) {
+    if (!values[field]) {
       errors[field] = 'Required';
     }
   });
+
+  const minimumOneRequired = ['industry', 'tech']
+  minimumOneRequired.forEach(field => {
+    if (values[field] < 1) {
+      errors[field] = 'At least one item required'
+    }
+  })
   return errors;
 };
 
