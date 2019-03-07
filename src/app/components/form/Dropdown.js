@@ -20,7 +20,8 @@ const styles = theme => ({
     margin: `${theme.spacing.unit * 2}px 0`
   },
   hasError: {
-    color: 'red'
+    color: 'red',
+    fontSize: 12
   },
   input: {
     display: 'flex',
@@ -80,7 +81,9 @@ const inputComponent = ({ inputRef, ...props }) => <div ref={inputRef} {...props
 const Control = props => {
   return (
     <TextField
+      required
       fullWidth
+      error={props.selectProps.meta.touched && props.selectProps.meta.invalid}
       InputProps={{
         inputComponent,
         inputProps: {
@@ -163,10 +166,10 @@ const IntegrationReactSelect = ({
   theme,
   suggestions,
   label,
-  placeholder,
   input,
-  meta: { touched, invalid, error }
+  meta
 }) => {
+  const {  touched, invalid, error, active } = meta
   const selectStyles = {
     input: base => ({
       ...base,
@@ -186,7 +189,7 @@ const IntegrationReactSelect = ({
           textFieldProps={{
             label: label,
             InputLabelProps: {
-              shrink: true
+              shrink: active || input.value.length > 0
             }
           }}
           {...input}
@@ -195,8 +198,9 @@ const IntegrationReactSelect = ({
           onBlur={() => {
             input.onBlur([...input.value]);
           }}
-          placeholder={placeholder}
+          placeholder={''}
           isMulti
+          meta={meta}
         />
         {touched && invalid && <span className={classes.hasError}>{error}</span>}
       </div>
