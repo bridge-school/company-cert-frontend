@@ -6,12 +6,14 @@ import getCompanyData from '../store/actions/getCompanyData';
 import CheckedParagraph from './typography/CheckedParagraph';
 import UncheckedParagraph from './typography/UncheckedParagraph';
 
-const assignChecklistItemToId = (id, checklist) => {
-  const checked = checklist.filter(checklistItem => {
-    return checklistItem.id === id;
-  });
-  return checked.length ? <CheckedParagraph key={id} text={checked[0].name} /> : null;
-};
+// checkedItems and uncheckedItems are doing the exact opposite
+// checkedItems filters the complete list of checklist items and returns the ones that have been checked
+const checkedItems = (completeChecklist, checkedIds) =>
+  completeChecklist.filter(checklistItem => checkedIds.includes(checklistItem.id));
+
+// uncheckedItems filters the complete list of checklist items and returns the ones that haven't been checked
+const uncheckedItems = (completeChecklist, uncheckedIds) =>
+  completeChecklist.filter(checklistItem => !uncheckedIds.includes(checklistItem.id));
 class Company extends React.Component {
   componentDidMount() {
     const { match, getCompanyData } = this.props; // eslint-disable-line
@@ -35,9 +37,12 @@ class Company extends React.Component {
             <p>Score: {companyData.score}/10</p>
           </Grid>
           <Divider variant="middle" />
-          {companyData &&
-            companyData.checked_checklist_ids &&
-            companyData.checked_checklist_ids.map(id => assignChecklistItemToId(id, checklist))}
+          {checkedItems(checklist, companyData.checked_checklist_ids).map(item => (
+            <CheckedParagraph text={item.name} />
+          ))}
+          {uncheckedItems(checklist, companyData.checked_checklist_ids).map(item => (
+            <UncheckedParagraph text={item.name} />
+          ))}
         </Grid>
       </Grid>
     );
