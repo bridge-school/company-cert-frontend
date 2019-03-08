@@ -1,10 +1,5 @@
 import { POST_COMPANY_SUCCESS, POST_COMPANY_FAILURE, RESET_COMPANY_DATA } from '../constants';
 
-const companyData = data => ({
-  type: 'SUBMIT_COMPANY_DATA_ACTION',
-  data
-});
-
 const countCompanyScore = checklistItems =>
   checklistItems ? checklistItems.filter(item => item).length : null;
 
@@ -40,8 +35,6 @@ export const resetAction = () => ({
 const submit = values => dispatch => {
   const score = countCompanyScore(values.companyChecklist);
   const parsedChecklist = parseCheckedIds(values.companyChecklist);
-  // maybe we don't need this action; it is used as a placeholder action for now
-  dispatch(companyData(values));
   postData(values, score, parsedChecklist)
     .then(data => {
       dispatch(postSuccessAction(data));
