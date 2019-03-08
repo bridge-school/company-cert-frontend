@@ -32,23 +32,23 @@ class CompanyForm extends Component {
           component={CompanyChecklistWrapper}
           checklistData={this.props.checklist}
         />
-        
-        <Field 
+
+        <Field
           name="industry"
-          component={Dropdown} 
-          label="Industry" 
+          component={Dropdown}
+          label="Industry"
           placeholder="Choose related industries"
           multi
-          suggestions={this.props.tech.map(item => ({label: item.name, value: item.id}))}
+          suggestions={this.props.tech.map(item => ({ label: item.name, value: item.id }))}
         />
 
-        <Field 
+        <Field
           name="tech"
-          component={Dropdown} 
-          label="Technology" 
+          component={Dropdown}
+          label="Technology"
           placeholder="Choose related technologies"
           multi
-          suggestions={this.props.industry.map(item => ({label: item.name, value: item.id}))}
+          suggestions={this.props.industry.map(item => ({ label: item.name, value: item.id }))}
         />
 
         <Button
@@ -68,13 +68,11 @@ const onSubmit = (values, dispatch) => {
   dispatch(submitCompanyForm(values));
 };
 
-const mapStateToProps = (state) => {
-  return ({
-    checklist: state.frontendData.checklist,
-    tech: state.frontendData.tech,
-    industry: state.frontendData.industry
-  })
-};
+const mapStateToProps = ({ frontendData: { checklist, tech, industry } }) => ({
+  checklist,
+  tech,
+  industry
+});
 
 CompanyForm = connect(mapStateToProps)(CompanyForm);
 
@@ -84,7 +82,7 @@ const CompanyReduxForm = reduxForm({
   onSubmit,
   initialValues: {
     interviewDate: new Date()
-  },
+  }
 })(CompanyForm);
 
 export default CompanyReduxForm;

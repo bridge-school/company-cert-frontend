@@ -6,7 +6,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 const CompanyChecklist = ({ label, input }) => {
   return (
     <FormControlLabel
-      control={<Checkbox checked={input.value ? true : false} onChange={input.onChange} />}
+      control={<Checkbox checked={input.value} onChange={input.onChange} />}
       label={label}
     />
   );
