@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
+import Chip from '@material-ui/core/Chip';
 import { connect } from 'react-redux';
 import getCompanyData from '../store/actions/getCompanyData';
 import CheckedParagraph from './typography/CheckedParagraph';
@@ -16,6 +17,7 @@ const uncheckedItems = (completeChecklist, uncheckedIds) =>
   completeChecklist.filter(checklistItem => !uncheckedIds.includes(checklistItem.id));
 
 const centerText = { textAlign: 'center' };
+const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
 class Company extends React.Component {
   componentDidMount() {
     const { match, getCompanyData } = this.props; // eslint-disable-line
@@ -48,6 +50,20 @@ class Company extends React.Component {
             {uncheckedItems(checklist, companyData.checked_checklist_ids).map(item => (
               <UncheckedParagraph key={item.id} text={item.name} />
             ))}
+          </div>
+          <div>
+            {companyData &&
+              companyData.industry &&
+              companyData.industry.map(tag => (
+                <Chip label={tag.label} key={tag.value} style={tagStyle} />
+              ))}
+          </div>
+          <div style={{ marginTop: '1rem' }}>
+            {companyData &&
+              companyData.tech &&
+              companyData.tech.map(tag => (
+                <Chip label={tag.label} key={tag.value} style={tagStyle} />
+              ))}
           </div>
         </Grid>
       </Grid>
