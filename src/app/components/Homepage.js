@@ -1,19 +1,14 @@
 import React, { useEffect } from 'react';
-
 import Grid from '@material-ui/core/Grid';
-
 import { connect } from 'react-redux';
-
-import CompanyForm from '../containers/CompanyForm';
-
 import { Redirect } from 'react-router-dom';
 
+import CompanyForm from '../containers/CompanyForm';
 import { resetAction } from '../store/actions/submitCompanyForm';
 
 const Homepage = ({ companyId, postSuccess, reset }) => {
   useEffect(() => {
     return () => {
-      console.log('Unmounting');
       reset();
     };
   }, []);

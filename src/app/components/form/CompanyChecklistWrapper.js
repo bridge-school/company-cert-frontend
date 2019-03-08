@@ -7,7 +7,7 @@ import { Field } from 'redux-form';
 
 import CompanyChecklist from './CompanyChecklist';
 
-const CompanyChecklistWrapper = ({ input, checklistData }) => {
+const CompanyChecklistWrapper = ({ checklistData }) => {
   return (
     <FormControl margin="normal" style={{ display: 'block' }}>
       <FormLabel component="legend">Company Checklist</FormLabel>
