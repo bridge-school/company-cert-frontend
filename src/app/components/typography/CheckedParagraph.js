@@ -8,7 +8,7 @@ const style = {
 
 const CheckedParagraph = ({ text }) => (
   <p style={style}>
-    <SvgIcon>
+    <SvgIcon style={{ marginRight: '5px' }}>
       <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
         <path
           fill="#08C39D"

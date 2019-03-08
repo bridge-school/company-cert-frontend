@@ -14,6 +14,8 @@ const checkedItems = (completeChecklist, checkedIds) =>
 // uncheckedItems filters the complete list of checklist items and returns the ones that haven't been checked
 const uncheckedItems = (completeChecklist, uncheckedIds) =>
   completeChecklist.filter(checklistItem => !uncheckedIds.includes(checklistItem.id));
+
+const centerText = { textAlign: 'center' };
 class Company extends React.Component {
   componentDidMount() {
     const { match, getCompanyData } = this.props; // eslint-disable-line
@@ -25,24 +27,28 @@ class Company extends React.Component {
     return (
       <Grid container justify="center">
         <Grid item xs={10} sm={8} md={6}>
-          <h1>Bridge Company Certification</h1>
-          <h2>{companyData.name}</h2>
-          <h2>Company Status:</h2>
+          <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
+          <h2 style={centerText}>{companyData.name}</h2>
+          <h3 style={{ ...centerText, fontSize: '1rem' }}>Company Status:</h3>
           <Grid container justify="space-between">
             {companyData.score > 5 ? (
               <CheckedParagraph text="Certified!" />
             ) : (
-              <UncheckedParagraph text="Uncertified" />
+              <UncheckedParagraph text="Not Certified" />
             )}
             <p>Score: {companyData.score}/10</p>
           </Grid>
-          <Divider variant="middle" />
-          {checkedItems(checklist, companyData.checked_checklist_ids).map(item => (
-            <CheckedParagraph text={item.name} />
-          ))}
-          {uncheckedItems(checklist, companyData.checked_checklist_ids).map(item => (
-            <UncheckedParagraph text={item.name} />
-          ))}
+          <Divider variant="middle" style={{ margin: '1rem 2rem 2rem' }} />
+          <div>
+            {checkedItems(checklist, companyData.checked_checklist_ids).map(item => (
+              <CheckedParagraph key={item.id} text={item.name} />
+            ))}
+          </div>
+          <div style={{ marginTop: '4rem' }}>
+            {uncheckedItems(checklist, companyData.checked_checklist_ids).map(item => (
+              <UncheckedParagraph key={item.id} text={item.name} />
+            ))}
+          </div>
         </Grid>
       </Grid>
     );
