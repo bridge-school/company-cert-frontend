@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-
-import logo from '../../assets/logo.svg';
-
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,8 +8,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
 
 const styles = {
   grow: {
@@ -23,7 +20,7 @@ const styles = {
   }
 };
 
-const ButtonAppBar = ({ title, classes: { grow, headerLogo } }) => {
+const ButtonAppBar = ({ classes: { grow, headerLogo } }) => {
   const [anchor, setAnchor] = useState(null);
   return (
     <AppBar position="fixed" color="inherit">

@@ -9,14 +9,19 @@ class Company extends React.Component {
   }
 
   render() {
-    const { match, companyData } = this.props; // eslint-disable-line
+    const { match, companyData } = this.props;
     return (
       <div>
         <h1>
           Company id:
           {match.params.id}
         </h1>
-        {companyData && <p>Company name: {companyData.name}</p>}
+        {companyData && (
+          <p>
+            Company name:
+            {companyData.name}
+          </p>
+        )}
         {/* here goes the beautiful design for this page */}
       </div>
     );
