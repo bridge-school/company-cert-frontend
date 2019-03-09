@@ -1,4 +1,9 @@
-import { POST_COMPANY_SUCCESS, POST_COMPANY_FAILURE, RESET_COMPANY_DATA } from '../constants';
+import {
+  POST_COMPANY_SUCCESS,
+  POST_COMPANY_FAILURE,
+  RESET_COMPANY_DATA,
+  BASE_URL
+} from '../constants';
 
 const countCompanyScore = checklistItems =>
   checklistItems ? checklistItems.filter(item => item).length : null;
@@ -9,7 +14,7 @@ const parseCheckedIds = checklistData =>
     : null;
 
 const postData = (data, score, checklist) => {
-  return fetch(`companies`, {
+  return fetch(`${BASE_URL}/companies`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

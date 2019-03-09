@@ -1,4 +1,4 @@
-import { GET_COMPANY_DATA_SUCCESS, GET_COMPANY_DATA_FAILURE } from '../constants';
+import { GET_COMPANY_DATA_SUCCESS, GET_COMPANY_DATA_FAILURE, BASE_URL } from '../constants';
 
 const getCompanyDataSuccessAction = data => ({
   type: GET_COMPANY_DATA_SUCCESS,
@@ -11,7 +11,7 @@ const getCompanyDataFailureAction = data => ({
 });
 
 const getData = companyId => dispatch => {
-  fetch(`/companies/${companyId}`)
+  fetch(`${BASE_URL}/companies/${companyId}`)
     .then(response => response.json())
     .then(json => dispatch(getCompanyDataSuccessAction(json)))
     .catch(error => {
