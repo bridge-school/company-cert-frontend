@@ -32,7 +32,7 @@ class Companies extends React.Component {
       return (
         <div key={index} style={{ height: '100px' }}>
           <h4 style={{ ...centerText, margin: '0 0 20px' }}>
-            <a href="#">{company.name}</a>
+            <a href={'/companies/' + company.id}>{company.name}</a>
           </h4>
           <div style={{ ...centerText }}>
             {/*Displays 3 tech tags*/}
