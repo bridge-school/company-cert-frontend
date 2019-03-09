@@ -1,4 +1,4 @@
-import { GET_COMPANIES_DATA_SUCCESS, GET_COMPANIES_DATA_FAILURE } from '../constants';
+import { GET_COMPANIES_DATA_SUCCESS, GET_COMPANIES_DATA_FAILURE, BASE_URL } from '../constants';
 
 // Action Creators
 const getCompaniesDataSuccessAction = data => ({
@@ -13,7 +13,7 @@ const getCompaniesDataFailureAction = data => ({
 
 // Thunk
 export default () => dispatch => {
-  fetch('/companies')
+  fetch(`${BASE_URL}/companies`)
     .then(response => response.json())
     .then(json => {
       const companies = json.data;
