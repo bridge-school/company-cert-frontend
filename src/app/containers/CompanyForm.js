@@ -13,10 +13,10 @@ import validate from '../validations';
 import Dropdown from '../components/form/Dropdown';
 
 class CompanyForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {};
+  // }
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props;
@@ -39,7 +39,7 @@ class CompanyForm extends Component {
           label="Industry"
           placeholder="Choose related industries"
           multi
-          suggestions={this.props.tech.map(item => ({ label: item.name, value: item.id }))}
+          suggestions={this.props.industry.map(item => ({ label: item.name, value: item.id }))}
         />
 
         <Field
@@ -48,7 +48,7 @@ class CompanyForm extends Component {
           label="Technology"
           placeholder="Choose related technologies"
           multi
-          suggestions={this.props.industry.map(item => ({ label: item.name, value: item.id }))}
+          suggestions={this.props.tech.map(item => ({ label: item.name, value: item.id }))}
         />
 
         <Button
