@@ -1,25 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import getCompaniesData from '../store/actions/getCompaniesData';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import Chip from '@material-ui/core/Chip';
-import Link from '@material-ui/core/Link';
-
-// Styles
-const centerText = { textAlign: 'center' };
-const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
-
-// Helper function
-const chooseRandomTags = (tagsArray, n) => {
-  // Shuffle array
-  const shuffled = tagsArray.sort(() => 0.5 - Math.random());
-
-  // Get sub-array of first n elements after shuffled
-  const selected = shuffled.slice(0, n);
-
-  return selected;
-};
+import getCompaniesData from '../store/actions/getCompaniesData';
+import CompanyCard from './CompanyCard';
 
 class Companies extends React.Component {
   componentDidMount() {
@@ -29,37 +13,16 @@ class Companies extends React.Component {
 
   renderCompaniesList() {
     const { companies } = this.props;
-    return companies.map((company, index) => {
-      return (
-        <div key={index} style={{ height: '100px' }}>
-          <h4 style={{ ...centerText, margin: '0 0 20px' }}>
-            <Link href={'/companies/' + company.id} color="inherit">
-              {company.name}
-            </Link>
-          </h4>
-          <div style={{ ...centerText }}>
-            {/*Displays 3 tech tags*/}
-            {chooseRandomTags(company.tech, 3).map(tag => (
-              <Chip label={tag.label} key={tag.value} style={tagStyle} />
-            ))}
-            {/*Displays 2 industry tags*/}
-            {chooseRandomTags(company.industry, 2).map(tag => (
-              <Chip label={tag.label} key={tag.value} style={tagStyle} />
-            ))}
-          </div>
-          <Divider style={{ margin: '20px' }} />
-        </div>
-      );
+    return companies.map(company => {
+      return <CompanyCard key={company.id} {...company} />;
     });
   }
 
   render() {
-    console.log(this.props);
     return (
       <Grid container justify="center">
         <Grid item xs={12}>
-          <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
-          {/*This is where the toggle buttons will go*/}
+          <h1 style={{ textAlign: 'center', fontSize: '1rem' }}>Bridge Company Certification</h1>
           <Divider variant="middle" style={{ margin: '1rem 2rem 2rem' }} />
           {this.renderCompaniesList()}
         </Grid>
