@@ -4,6 +4,7 @@ import getCompaniesData from '../store/actions/getCompaniesData';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
+import Link from '@material-ui/core/Link';
 
 // Styles
 const centerText = { textAlign: 'center' };
@@ -32,7 +33,9 @@ class Companies extends React.Component {
       return (
         <div key={index} style={{ height: '100px' }}>
           <h4 style={{ ...centerText, margin: '0 0 20px' }}>
-            <a href={'/companies/' + company.id}>{company.name}</a>
+            <Link href={'/companies/' + company.id} color="inherit">
+              {company.name}
+            </Link>
           </h4>
           <div style={{ ...centerText }}>
             {/*Displays 3 tech tags*/}
