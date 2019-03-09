@@ -10,11 +10,15 @@ import UncheckedParagraph from './typography/UncheckedParagraph';
 // checkedItems and uncheckedItems are doing the exact opposite
 // checkedItems filters the complete list of checklist items and returns the ones that have been checked
 const checkedItems = (completeChecklist, checkedIds) =>
-  completeChecklist.filter(checklistItem => checkedIds.includes(checklistItem.id));
+  completeChecklist.length && checkedIds
+    ? completeChecklist.filter(checklistItem => checkedIds.includes(checklistItem.id))
+    : [];
 
 // uncheckedItems filters the complete list of checklist items and returns the ones that haven't been checked
 const uncheckedItems = (completeChecklist, uncheckedIds) =>
-  completeChecklist.filter(checklistItem => !uncheckedIds.includes(checklistItem.id));
+  completeChecklist.length && uncheckedIds
+    ? completeChecklist.filter(checklistItem => !uncheckedIds.includes(checklistItem.id))
+    : completeChecklist;
 
 const centerText = { textAlign: 'center' };
 const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
