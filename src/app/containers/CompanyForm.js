@@ -13,10 +13,10 @@ import validate from '../validations';
 import Dropdown from '../components/form/Dropdown';
 
 class CompanyForm extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {};
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props;
