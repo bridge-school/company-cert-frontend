@@ -8,7 +8,7 @@ import { showAllCompanies, showCertifiedCompanies } from '../store/actions/showO
 const styles = {
   wrapper: {
     position: 'fixed',
-    top: 65,
+    top: 60,
     width: '100%',
     dropShadow: 'none',
     height: 100,
