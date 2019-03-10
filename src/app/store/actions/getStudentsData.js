@@ -15,6 +15,23 @@ const getStudentsData = () => dispatch => {
     .then(response => response.json())
     .then(json => {
       const students = json;
+
+      // sort alphabetically by last name
+      students.sort((a, b) => {
+        const splitA = a.name.split(' ');
+        const splitB = b.name.split(' ');
+        const lastA = splitA[splitA.length - 1].toLowerCase(); // get the last word of the name, ignore upper and lowecase
+        const lastB = splitB[splitB.length - 1].toLowerCase(); // get the last word of the name, ignore upper and lowecase
+
+        if (lastA < lastB) {
+          return -1;
+        }
+        if (lastA > lastB) {
+          return 1;
+        }
+        return 0;
+      });
+
       return dispatch(getStudentsDataSuccessAction(students));
     })
     .catch(error => dispatch(getStudentsDataFailureAction(error)));
