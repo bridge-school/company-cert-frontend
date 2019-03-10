@@ -20,7 +20,7 @@ class Student extends Component {
     return (
       <Grid container justify="center">
         <Grid item xs={10} sm={8} md={6}>
-          <div style={{ padding: 50 }}>
+          <div>
             <form autoComplete="off" onSubmit={handleSubmit}>
               <h1>Student Info</h1>
               <Field name="studentName" component={StudentName} type="text" label="Full Name" />
