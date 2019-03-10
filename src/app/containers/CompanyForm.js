@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 
 import { Field, reduxForm } from 'redux-form';
 
-import CompanyName from '../components/form/CompanyName';
+import CompanyName from '../components/form/NameField';
 import InterviewDate from '../components/form/InterviewDate';
 import CompanyChecklistWrapper from '../components/form/CompanyChecklistWrapper';
 import submitCompanyForm from '../store/actions/submitCompanyForm';
@@ -20,17 +20,23 @@ class CompanyForm extends Component {
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props;
+    const { checklist, industry, tech } = this.props;
 
     return (
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <Field name="companyName" component={CompanyName} label="Company Name" />
+        <Field name="companyName" component={CompanyName} label="Company Name" id="company-name" />
 
-        <Field name="interviewDate" component={InterviewDate} label="Interview Date" />
+        <Field
+          name="interviewDate"
+          component={InterviewDate}
+          id="company-interview-date"
+          label="Interview Date"
+        />
 
         <Field
           name="companyChecklist"
           component={CompanyChecklistWrapper}
-          checklistData={this.props.checklist}
+          checklistData={checklist}
         />
 
         <Field
@@ -39,7 +45,7 @@ class CompanyForm extends Component {
           label="Industry"
           placeholder="Choose related industries"
           multi
-          suggestions={this.props.industry.map(item => ({ label: item.name, value: item.id }))}
+          suggestions={industry.map(item => ({ label: item.name, value: item.id }))}
         />
 
         <Field
@@ -48,7 +54,7 @@ class CompanyForm extends Component {
           label="Technology"
           placeholder="Choose related technologies"
           multi
-          suggestions={this.props.tech.map(item => ({ label: item.name, value: item.id }))}
+          suggestions={tech.map(item => ({ label: item.name, value: item.id }))}
         />
 
         <Button
