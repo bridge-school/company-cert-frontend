@@ -11,6 +11,7 @@ export const SHOW_ALL_COMPANIES = 'SHOW_ALL_COMAPNIES';
 
 export const POST_STUDENT_SUCCESS = 'POST_STUDENT_SUCCESS';
 export const POST_STUDENT_FAILURE = 'POST_STUDENT_FAILURE';
+export const RESET_STUDENT_DATA = 'RESET_STUDENT_DATA';
 
 export const BASE_URL =
   process.env.NODE_ENV === 'development'
