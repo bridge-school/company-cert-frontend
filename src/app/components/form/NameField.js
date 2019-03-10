@@ -3,12 +3,17 @@ import React from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 
-const CompanyName = ({ label, input, meta: { touched, invalid } }) => {
+/**
+ * This is the name field which is used across the site
+ * Used by company form and student form.
+ */
+
+const NameField = ({ label, input, id, meta: { touched, invalid } }) => {
   return (
     <FormGroup>
       <TextField
         required
-        id="company-name"
+        id={id}
         label={label}
         {...input}
         margin="normal"
@@ -18,4 +23,4 @@ const CompanyName = ({ label, input, meta: { touched, invalid } }) => {
   );
 };
 
-export default CompanyName;
+export default NameField;
