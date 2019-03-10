@@ -1,7 +1,6 @@
 import Homepage from '../components/Homepage';
 import Companies from '../components/Companies';
 import Company from '../components/Company';
-import AddStudent from '../components/AddStudent';
 import Student from '../components/Student';
 import Students from '../components/Students';
 
@@ -18,7 +17,7 @@ const routes = [
   },
   {
     path: '/student',
-    component: AddStudent
+    component: Student
   },
   {
     path: '/companies/:id',
@@ -28,10 +27,6 @@ const routes = [
     path: '/students',
     exact: true,
     component: Students
-  },
-  {
-    path: '/students/:id',
-    component: Student
   }
 ];
 
