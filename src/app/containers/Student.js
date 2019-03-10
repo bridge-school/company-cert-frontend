@@ -23,7 +23,13 @@ class Student extends Component {
           <div>
             <form autoComplete="off" onSubmit={handleSubmit}>
               <h1>Student Info</h1>
-              <Field name="studentName" component={StudentName} type="text" label="Full Name" />
+              <Field
+                component={StudentName}
+                name="studentName"
+                type="text"
+                label="Full Name"
+                id="student-name"
+              />
               <Field
                 name="interviewDate"
                 component={InterviewDate}
