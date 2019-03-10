@@ -1,7 +1,7 @@
 import Homepage from '../components/Homepage';
 import Companies from '../components/Companies';
 import Company from '../components/Company';
-import Student from '../containers/Student';
+import Student from '../components/Student';
 
 const routes = [
   {
