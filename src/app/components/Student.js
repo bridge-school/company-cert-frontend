@@ -1,16 +1,5 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 
-import StudentForm from './StudentForm';
-
-const Student = () => {
-  return (
-    <Grid container justify="center">
-      <Grid item xs={10} sm={8} md={6}>
-        <StudentForm />
-      </Grid>
-    </Grid>
-  );
-};
+const Student = ({ match }) => <h1>Student Id: {match.params.id}</h1>;
 
 export default Student;
