@@ -10,7 +10,7 @@ const initialState = {
   postSuccess: false,
   getCompanySuccess: false,
   companyId: null,
-  companyData: null
+  companyData: {}
 };
 
 const companyReducer = (state = initialState, { type, payload, data }) => {
