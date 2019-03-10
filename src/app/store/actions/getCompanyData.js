@@ -2,7 +2,7 @@ import { GET_COMPANY_DATA_SUCCESS, GET_COMPANY_DATA_FAILURE, BASE_URL } from '..
 
 const getCompanyDataSuccessAction = data => ({
   type: GET_COMPANY_DATA_SUCCESS,
-  data
+  payload: data
 });
 
 const getCompanyDataFailureAction = data => ({
