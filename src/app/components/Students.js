@@ -13,7 +13,7 @@ class Students extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ students: state.students.data });
+const mapStateToProps = state => ({ students: state.students.studentsData });
 
 const mapDispatchToProps = dispatch => ({ getStudentsData: () => dispatch(getStudentsData()) });
 
