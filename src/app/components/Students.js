@@ -1,5 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import getStudentsData from '../store/actions/getStudentsData';
 
-const Student = () => <h1>Students</h1>;
+class Students extends React.Component {
+  componentDidMount() {
+    const { getStudentsData } = this.props;  // eslint-disable-line
+    getStudentsData();
+  }
 
-export default Student;
+  render() {
+    return <h1>Students</h1>;
+  }
+}
+
+const mapStateToProps = state => ({ students: state.students.data });
+
+const mapDispatchToProps = dispatch => ({ getStudentsData: () => dispatch(getStudentsData()) });
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Students);

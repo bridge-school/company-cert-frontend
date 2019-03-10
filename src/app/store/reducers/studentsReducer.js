@@ -5,13 +5,13 @@ const initialState = {
   getSuccess: false
 };
 
-const studentsReducer = (state = initialState, { type, payload }) => {
+const studentsReducer = (state = initialState, { type, data }) => {
   switch (type) {
     case GET_STUDENTS_SUCCESS:
       return {
         ...state,
         getSuccess: true,
-        studentsData: payload
+        studentsData: data
       };
     case GET_STUDENTS_FAILURE:
       return {
