@@ -1,31 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import getCompaniesData from '../store/actions/getCompaniesData';
+import CompanyCard from './CompanyCard';
+import SecondaryNav from './SecondaryNav';
 
 class Companies extends React.Component {
   componentDidMount() {
-    const { getCompaniesData } = this.props; // eslint-disable-line
+    const { getCompaniesData } = this.props;
     getCompaniesData();
   }
 
   renderCompaniesList() {
-    const { companies } = this.props; // eslint-disable-line
-    return companies.map((company, index) => {
-      return (
-        // placeholder for company cards
-        <div key={index}>
-          <h4>{company.name}</h4>
-        </div>
-      );
+    const { companies } = this.props;
+    return companies.map(company => {
+      return <CompanyCard key={company.id} {...company} />;
     });
   }
 
   render() {
     return (
-      <div style={{ padding: 50 }}>
-        <h1>Companies</h1>
-        {this.renderCompaniesList()}
-      </div>
+      <Grid container justify="center">
+        <Grid item xs={12}>
+          <SecondaryNav />
+          <div style={{ marginTop: '100px' }}>{this.renderCompaniesList()}</div>
+        </Grid>
+      </Grid>
     );
   }
 }
