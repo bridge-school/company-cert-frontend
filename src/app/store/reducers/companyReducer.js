@@ -13,7 +13,7 @@ const initialState = {
   companyData: {}
 };
 
-const companyReducer = (state = initialState, { type, payload, data }) => {
+const companyReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case POST_COMPANY_SUCCESS:
       return {
@@ -33,7 +33,7 @@ const companyReducer = (state = initialState, { type, payload, data }) => {
       return {
         ...state,
         getCompanySuccess: true,
-        companyData: data
+        companyData: payload
       };
     case GET_COMPANY_DATA_FAILURE:
       return {
