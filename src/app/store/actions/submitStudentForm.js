@@ -15,7 +15,7 @@ const postStudentData = data => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ ...data, tech: 'temp', industry: 'temp' }) // placeholder industry and tech
+    body: JSON.stringify({ ...data })
   }).then(response => response.json());
 };
 

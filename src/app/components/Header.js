@@ -49,7 +49,7 @@ const ButtonAppBar = ({ classes: { grow, headerLogo } }) => {
             <MenuItem onClick={() => setAnchor(null)}>Add Company</MenuItem>
           </Link>
           <Link to="/companies">
-            <MenuItem onClick={() => setAnchor(null)}>Browses Companies</MenuItem>
+            <MenuItem onClick={() => setAnchor(null)}>Browse Companies</MenuItem>
           </Link>
           <Link to="/student">
             <MenuItem onClick={() => setAnchor(null)}>Add Student</MenuItem>
