@@ -31,14 +31,14 @@ const Student = props => {
       <Field
         name="industry"
         component={Dropdown}
-        label="Industries"
+        label="Industry"
         multi
         suggestions={industry.map(item => ({ label: item.name, value: item.id }))}
       />
       <Field
         name="tech"
         component={Dropdown}
-        label="Tech Stack"
+        label="Technology"
         multi
         suggestions={tech.map(item => ({ label: item.name, value: item.id }))}
       />
