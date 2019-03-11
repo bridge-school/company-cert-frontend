@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import { connect } from 'react-redux';
+import Wrapper from './Wrapper';
 import getCompanyData from '../store/actions/getCompanyData';
 import CheckedParagraph from './typography/CheckedParagraph';
 import UncheckedParagraph from './typography/UncheckedParagraph';
@@ -31,7 +32,7 @@ class Company extends React.Component {
   render() {
     const { companyData, checklist } = this.props;
     return (
-      <Grid container justify="center">
+      <Wrapper>
         <Grid item xs={10} sm={8} md={6}>
           <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
           <h2 style={centerText}>{companyData.name}</h2>
@@ -70,7 +71,7 @@ class Company extends React.Component {
               ))}
           </div>
         </Grid>
-      </Grid>
+      </Wrapper>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
+import Wrapper from './Wrapper';
 import StudentForm from './StudentForm';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -13,12 +14,12 @@ const Student = ({ postSuccess, studentId, reset }) => {
   }, []);
 
   return (
-    <Grid container justify="center">
+    <Wrapper>
       <Grid item xs={10} sm={8} md={6}>
         <StudentForm />
         {postSuccess && <Redirect to={`/students`} />}
       </Grid>
-    </Grid>
+    </Wrapper>
   );
 };
 
