@@ -14,12 +14,10 @@ const Homepage = ({ companyId, postSuccess, reset }) => {
   }, []);
 
   return (
-    <Grid container justify="center">
-      <Grid item xs={10} sm={8} md={6}>
-        <h1>Bridge Company Certification</h1>
-        <CompanyForm />
-        {postSuccess && <Redirect to={`/companies/${companyId}`} />}
-      </Grid>
+    <Grid item xs={10} sm={8} md={6}>
+      <h1>Bridge Company Certification</h1>
+      <CompanyForm />
+      {postSuccess && <Redirect to={`/companies/${companyId}`} />}
     </Grid>
   );
 };

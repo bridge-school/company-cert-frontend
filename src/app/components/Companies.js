@@ -20,11 +20,9 @@ class Companies extends React.Component {
 
   render() {
     return (
-      <Grid container justify="center">
-        <Grid item xs={12}>
-          <SecondaryNav />
-          <div style={{ marginTop: '120px' }}>{this.renderCompaniesList()}</div>
-        </Grid>
+      <Grid item xs={12}>
+        <SecondaryNav />
+        <div style={{ marginTop: '120px' }}>{this.renderCompaniesList()}</div>
       </Grid>
     );
   }

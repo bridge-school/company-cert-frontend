@@ -13,11 +13,9 @@ const Student = ({ postSuccess, studentId, reset }) => {
   }, []);
 
   return (
-    <Grid container justify="center">
-      <Grid item xs={10} sm={8} md={6}>
-        <StudentForm />
-        {postSuccess && <Redirect to={`/students`} />}
-      </Grid>
+    <Grid item xs={10} sm={8} md={6}>
+      <StudentForm />
+      {postSuccess && <Redirect to={`/students`} />}
     </Grid>
   );
 };
