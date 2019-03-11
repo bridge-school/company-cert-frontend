@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import Wrapper from './Wrapper';
 import getCompaniesData from '../store/actions/getCompaniesData';
 import CompanyCard from './CompanyCard';
 import SecondaryNav from './SecondaryNav';
@@ -21,12 +20,10 @@ class Companies extends React.Component {
 
   render() {
     return (
-      <Wrapper>
-        <Grid item xs={12}>
-          <SecondaryNav />
-          <div style={{ marginTop: '120px' }}>{this.renderCompaniesList()}</div>
-        </Grid>
-      </Wrapper>
+      <Grid item xs={12}>
+        <SecondaryNav />
+        <div style={{ marginTop: '120px' }}>{this.renderCompaniesList()}</div>
+      </Grid>
     );
   }
 }
