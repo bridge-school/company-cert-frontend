@@ -17,7 +17,7 @@ const Homepage = ({ companyId, postSuccess, reset }) => {
     <Grid item xs={10} sm={8} md={6}>
       <h1>Bridge Company Certification</h1>
       <CompanyForm />
-      {postSuccess && <Redirect to={`/companies/${companyId}`} />}
+      {postSuccess && <Redirect push to={`/companies/${companyId}`} />}
     </Grid>
   );
 };
