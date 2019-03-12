@@ -9,9 +9,7 @@ const countCompanyScore = checklistItems =>
   checklistItems ? checklistItems.filter(item => item).length : null;
 
 const parseCheckedIds = checklistData =>
-  checklistData
-    ? checklistData.reduce((acc, currValue, currIndex) => [...acc, currIndex], [])
-    : null;
+  checklistData ? checklistData.map((item, index) => item && index) : null;
 
 const postData = (data, score, checklist) => {
   return fetch(`${BASE_URL}/companies`, {
@@ -40,6 +38,7 @@ export const resetAction = () => ({
 const submit = values => dispatch => {
   const score = countCompanyScore(values.companyChecklist);
   const parsedChecklist = parseCheckedIds(values.companyChecklist);
+  debugger;
   postData(values, score, parsedChecklist)
     .then(data => {
       dispatch(postSuccessAction(data));
