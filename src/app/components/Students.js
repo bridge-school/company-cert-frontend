@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+
 import getStudentsData from '../store/actions/getStudentsData';
+import StudentCard from './StudentCard'
 
 class Students extends React.Component {
   componentDidMount() {
@@ -9,7 +12,16 @@ class Students extends React.Component {
   }
 
   render() {
-    return <h1>Students</h1>;
+    const { students } = this.props;
+    console.log(students);
+    return (
+      <Grid item xs={10} sm={8} md={6}>
+        <h1>Students</h1>
+        {students.map(student => (
+          <StudentCard key={student.id} {...student} />
+        ))}
+      </Grid>
+    );
   }
 }
 
