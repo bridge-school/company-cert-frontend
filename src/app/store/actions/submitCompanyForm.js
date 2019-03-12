@@ -38,7 +38,6 @@ export const resetAction = () => ({
 const submit = values => dispatch => {
   const score = countCompanyScore(values.companyChecklist);
   const parsedChecklist = parseCheckedIds(values.companyChecklist);
-  debugger;
   postData(values, score, parsedChecklist)
     .then(data => {
       dispatch(postSuccessAction(data));
