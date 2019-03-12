@@ -31,45 +31,43 @@ class Company extends React.Component {
   render() {
     const { companyData, checklist } = this.props;
     return (
-      <Grid container justify="center">
-        <Grid item xs={10} sm={8} md={6}>
-          <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
-          <h2 style={centerText}>{companyData.name}</h2>
-          <h3 style={{ ...centerText, fontSize: '1rem' }}>Company Status:</h3>
-          <Grid container justify="space-between">
-            {companyData.score > 5 ? (
-              <CheckedParagraph text="Certified!" />
-            ) : (
-              <UncheckedParagraph text="Not Certified" />
-            )}
-            <p>Score: {companyData.score}/10</p>
-          </Grid>
-          <Divider variant="middle" style={{ margin: '1rem 2rem 2rem' }} />
-          <div>
-            {checkedItems(checklist, companyData.checked_checklist_ids).map(item => (
-              <CheckedParagraph key={item.id} text={item.name} />
-            ))}
-          </div>
-          <div style={{ marginTop: '4rem' }}>
-            {uncheckedItems(checklist, companyData.checked_checklist_ids).map(item => (
-              <UncheckedParagraph key={item.id} text={item.name} />
-            ))}
-          </div>
-          <div>
-            {companyData &&
-              companyData.industry &&
-              companyData.industry.map(tag => (
-                <Chip label={tag.label} key={tag.value} style={tagStyle} />
-              ))}
-          </div>
-          <div style={{ marginTop: '1rem' }}>
-            {companyData &&
-              companyData.tech &&
-              companyData.tech.map(tag => (
-                <Chip label={tag.label} key={tag.value} style={tagStyle} />
-              ))}
-          </div>
+      <Grid item xs={10} sm={8} md={6}>
+        <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
+        <h2 style={centerText}>{companyData.name}</h2>
+        <h3 style={{ ...centerText, fontSize: '1rem' }}>Company Status:</h3>
+        <Grid container justify="space-between">
+          {companyData.score > 5 ? (
+            <CheckedParagraph text="Certified!" />
+          ) : (
+            <UncheckedParagraph text="Not Certified" />
+          )}
+          <p>Score: {companyData.score}/10</p>
         </Grid>
+        <Divider variant="middle" style={{ margin: '1rem 2rem 2rem' }} />
+        <div>
+          {checkedItems(checklist, companyData.checked_checklist_ids).map(item => (
+            <CheckedParagraph key={item.id} text={item.name} />
+          ))}
+        </div>
+        <div style={{ marginTop: '4rem' }}>
+          {uncheckedItems(checklist, companyData.checked_checklist_ids).map(item => (
+            <UncheckedParagraph key={item.id} text={item.name} />
+          ))}
+        </div>
+        <div>
+          {companyData &&
+            companyData.industry &&
+            companyData.industry.map(tag => (
+              <Chip label={tag.label} key={tag.value} style={tagStyle} />
+            ))}
+        </div>
+        <div style={{ marginTop: '1rem' }}>
+          {companyData &&
+            companyData.tech &&
+            companyData.tech.map(tag => (
+              <Chip label={tag.label} key={tag.value} style={tagStyle} />
+            ))}
+        </div>
       </Grid>
     );
   }

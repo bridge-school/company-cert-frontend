@@ -1,8 +1,14 @@
-import { GET_COMPANIES_DATA_SUCCESS, GET_COMPANIES_DATA_FAILURE } from '../constants';
+import {
+  GET_COMPANIES_DATA_SUCCESS,
+  GET_COMPANIES_DATA_FAILURE,
+  SHOW_ALL_COMPANIES,
+  SHOW_CERTIFIED_COMPANIES
+} from '../constants';
 
 const initialState = {
   getCompaniesSuccess: false,
-  data: []
+  data: [],
+  showOnlyCertified: false
 };
 
 export default (state = initialState, { type, data }) => {
@@ -18,6 +24,16 @@ export default (state = initialState, { type, data }) => {
         ...state,
         getCompaniesSuccess: false,
         data: null
+      };
+    case SHOW_ALL_COMPANIES:
+      return {
+        ...state,
+        showOnlyCertified: false
+      };
+    case SHOW_CERTIFIED_COMPANIES:
+      return {
+        ...state,
+        showOnlyCertified: true
       };
     default:
       return state;

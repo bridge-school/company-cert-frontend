@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
 import getCompaniesData from '../store/actions/getCompaniesData';
 import CompanyCard from './CompanyCard';
+import SecondaryNav from './SecondaryNav';
 
 class Companies extends React.Component {
   componentDidMount() {
@@ -20,12 +20,9 @@ class Companies extends React.Component {
 
   render() {
     return (
-      <Grid container justify="center">
-        <Grid item xs={12}>
-          <h1 style={{ textAlign: 'center', fontSize: '1rem' }}>Bridge Company Certification</h1>
-          <Divider variant="middle" style={{ margin: '1rem 2rem 2rem' }} />
-          {this.renderCompaniesList()}
-        </Grid>
+      <Grid item xs={12}>
+        <SecondaryNav />
+        <div style={{ marginTop: '120px' }}>{this.renderCompaniesList()}</div>
       </Grid>
     );
   }
