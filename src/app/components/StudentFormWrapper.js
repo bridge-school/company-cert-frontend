@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { resetAction } from '../store/actions/submitStudentForm';
 
-const Student = ({ postSuccess, studentId, reset }) => {
+const StudentFormWrapper = ({ postSuccess, studentId, reset }) => {
   useEffect(() => {
     return () => {
       reset();
@@ -34,4 +34,4 @@ const mapStateToProps = ({ student: { postSuccess, studentId } }) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Student);
+)(StudentFormWrapper);

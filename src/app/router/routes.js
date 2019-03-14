@@ -1,7 +1,7 @@
 import Homepage from '../components/Homepage';
 import Companies from '../components/Companies';
 import Company from '../components/Company';
-import Student from '../components/Student';
+import StudentFormWrapper from '../components/StudentFormWrapper';
 import Students from '../components/Students';
 
 const routes = [
@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/student',
-    component: Student
+    component: StudentFormWrapper
   },
   {
     path: '/companies/:id',
