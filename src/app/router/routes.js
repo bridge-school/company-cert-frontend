@@ -3,6 +3,7 @@ import Companies from '../components/Companies';
 import Company from '../components/Company';
 import StudentFormWrapper from '../components/StudentFormWrapper';
 import Students from '../components/Students';
+import Student from '../components/Student';
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: '/students',
     exact: true,
     component: Students
+  },
+  {
+    path: '/students/:id',
+    exact: true,
+    component: Student
   }
 ];
 
