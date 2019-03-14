@@ -161,15 +161,8 @@ const components = {
   ValueContainer
 };
 
-const IntegrationReactSelect = ({
-  classes,
-  theme,
-  suggestions,
-  label,
-  input,
-  meta
-}) => {
-  const {  touched, invalid, error, active } = meta
+const IntegrationReactSelect = ({ classes, theme, suggestions, label, input, meta }) => {
+  const { touched, invalid, error, active } = meta;
   const selectStyles = {
     input: base => ({
       ...base,
@@ -195,9 +188,7 @@ const IntegrationReactSelect = ({
           {...input}
           options={suggestions}
           components={components}
-          onBlur={() => {
-            input.onBlur([...input.value]);
-          }}
+          onBlur={e => e.preventDefault()}
           placeholder={''}
           isMulti
           meta={meta}
