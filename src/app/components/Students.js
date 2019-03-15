@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
 import getStudentsData from '../store/actions/getStudentsData';
-import StudentCard from './StudentCard'
+import StudentCard from './StudentCard';
 
 class Students extends React.Component {
   componentDidMount() {
-    const { getStudentsData } = this.props;  // eslint-disable-line
+    const { getStudentsData } = this.props; // eslint-disable-line
     getStudentsData();
   }
 
@@ -15,7 +15,7 @@ class Students extends React.Component {
     const { students } = this.props;
     console.log(students);
     return (
-      <Grid item xs={10} sm={8} md={6}>
+      <Grid item xs={12} style={{ textAlign: 'center' }}>
         <h1>Students</h1>
         {students.map(student => (
           <StudentCard key={student.id} {...student} />
