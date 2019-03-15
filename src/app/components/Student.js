@@ -1,35 +1,68 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import StudentForm from './StudentForm';
+import Chip from '@material-ui/core/Chip';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { resetAction } from '../store/actions/submitStudentForm';
+import getStudentData from '../store/actions/getStudentData';
 
-const Student = ({ postSuccess, studentId, reset }) => {
-  useEffect(() => {
-    return () => {
-      reset();
-    };
-  }, []);
+const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
 
-  return (
-    <Grid item xs={10} sm={8} md={6}>
-      <StudentForm />
-      {postSuccess && <Redirect push to={`/students`} />}
-    </Grid>
-  );
-};
+class Student extends React.Component {
+  componentDidMount() {
+    const { match, getStudentData } = this.props; // eslint-disable-line
+    getStudentData(match.params.id);
+  }
 
-const mapDispatchToProps = {
-  reset: resetAction
-};
+  render() {
+    const { studentData, studentMatches } = this.props;
+    return (
+      <Grid item xs={10} sm={8} md={6}>
+        <h1>{studentData.name}</h1>
+        <div>
+          {studentData &&
+            studentData.industry &&
+            studentData.industry.map(tag => (
+              <Chip label={tag.label} key={tag.value} style={tagStyle} />
+            ))}
+        </div>
+        <div style={{ marginTop: '1rem' }}>
+          {studentData &&
+            studentData.tech &&
+            studentData.tech.map(tag => (
+              <Chip label={tag.label} key={tag.value} style={tagStyle} />
+            ))}
+        </div>
+        {studentMatches.map(match => {
+          return (
+            <div>
+              <h2>{match.name}</h2>
+              <div>
+                Industry:
+                {match.industry.map(industry => (
+                  <Chip label={industry.label} style={tagStyle} />
+                ))}
+              </div>
+              <div>
+                Tech:
+                {match.tech.map(tech => (
+                  <Chip label={tech.label} style={tagStyle} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </Grid>
+    );
+  }
+}
 
-const mapStateToProps = ({ student: { postSuccess, studentId } }) => {
-  return {
-    postSuccess,
-    studentId
-  };
-};
+const mapStateToProps = state => ({
+  studentData: state.student.studentData,
+  studentMatches: state.student.studentMatches
+});
+
+const mapDispatchToProps = dispatch => ({
+  getStudentData: studentId => dispatch(getStudentData(studentId))
+});
 
 export default connect(
   mapStateToProps,
