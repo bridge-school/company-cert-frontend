@@ -35,6 +35,7 @@ class Student extends React.Component {
           return (
             <div>
               <h2>{match.name}</h2>
+              <p>{match.score}</p>
               <div>
                 Industry:
                 {match.industry.map(industry => (
