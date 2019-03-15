@@ -32,7 +32,23 @@ class Student extends React.Component {
             ))}
         </div>
         {studentMatches.map(match => {
-          return <div>{match.name}</div>;
+          return (
+            <div>
+              <h2>{match.name}</h2>
+              <div>
+                Industry:
+                {match.industry.map(industry => (
+                  <Chip label={industry.label} style={tagStyle} />
+                ))}
+              </div>
+              <div>
+                Tech:
+                {match.tech.map(tech => (
+                  <Chip label={tech.label} style={tagStyle} />
+                ))}
+              </div>
+            </div>
+          );
         })}
       </Grid>
     );
