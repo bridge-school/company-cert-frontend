@@ -13,7 +13,7 @@ class Student extends React.Component {
   }
 
   render() {
-    const { studentData } = this.props;
+    const { studentData, studentMatches } = this.props;
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1>{studentData.name}</h1>
@@ -31,13 +31,17 @@ class Student extends React.Component {
               <Chip label={tag.label} key={tag.value} style={tagStyle} />
             ))}
         </div>
+        {studentMatches.map(match => {
+          return <div>{match.name}</div>;
+        })}
       </Grid>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  studentData: state.student.studentData
+  studentData: state.student.studentData,
+  studentMatches: state.student.studentMatches
 });
 
 const mapDispatchToProps = dispatch => ({
