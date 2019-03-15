@@ -33,19 +33,19 @@ class Student extends React.Component {
         </div>
         {studentMatches.map(match => {
           return (
-            <div>
+            <div key={match.id}>
               <h2>{match.name}</h2>
               <p>{match.score}</p>
               <div>
                 Industry:
                 {match.industry.map(industry => (
-                  <Chip label={industry.label} style={tagStyle} />
+                  <Chip label={industry.label} style={tagStyle} key={industry.value} />
                 ))}
               </div>
               <div>
                 Tech:
                 {match.tech.map(tech => (
-                  <Chip label={tech.label} style={tagStyle} />
+                  <Chip label={tech.label} style={tagStyle} key={tech.value} />
                 ))}
               </div>
             </div>

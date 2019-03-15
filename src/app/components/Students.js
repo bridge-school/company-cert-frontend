@@ -13,7 +13,6 @@ class Students extends React.Component {
 
   render() {
     const { students } = this.props;
-    console.log(students);
     return (
       <Grid item xs={12} style={{ textAlign: 'center' }}>
         <h1>Students</h1>
