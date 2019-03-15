@@ -39,7 +39,7 @@ const getStudentData = studentId => dispatch => {
     .then(response => response.json())
     .then(studentJson => {
       dispatch(getStudentSuccess(studentJson));
-      fetch(`${BASE_URL}/companies`)
+      fetch(`${BASE_URL}/companies?filter=certified`)
         .then(response => response.json())
         .then(companiesJson => {
           const companies = companiesJson.data;
