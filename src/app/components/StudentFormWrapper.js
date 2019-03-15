@@ -15,7 +15,7 @@ const StudentFormWrapper = ({ postSuccess, studentId, reset }) => {
   return (
     <Grid item xs={10} sm={8} md={6}>
       <StudentForm />
-      {postSuccess && <Redirect push to={`/students`} />}
+      {postSuccess && <Redirect push to={`/students/${studentId}`} />}
     </Grid>
   );
 };

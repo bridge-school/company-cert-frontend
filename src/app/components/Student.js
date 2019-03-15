@@ -16,7 +16,7 @@ class Student extends React.Component {
     const { studentData } = this.props;
     return (
       <Grid item xs={10} sm={8} md={6}>
-        <h1>Student</h1>
+        <h1>{studentData.name}</h1>
         <div>
           {studentData &&
             studentData.industry &&
