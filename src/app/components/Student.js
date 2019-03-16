@@ -1,37 +1,87 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import StudentForm from './StudentForm';
+import Chip from '@material-ui/core/Chip';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { resetAction } from '../store/actions/submitStudentForm';
+import getStudentData from '../store/actions/getStudentData';
+import Match from './Match';
+import { Link } from 'react-router-dom';
 
-const Student = ({ postSuccess, studentId, reset }) => {
-  useEffect(() => {
-    return () => {
-      reset();
-    };
-  }, []);
-
-  return (
-    <Grid item xs={10} sm={8} md={6}>
-      <StudentForm />
-      {postSuccess && <Redirect push to={`/students`} />}
-    </Grid>
-  );
+const styles = {
+  section: {
+    marginBottom: 30
+  },
+  tagStyle: {
+    height: 25,
+    margin: '0 5px 5px 0',
+    backgroundColor: '#65B8DE'
+  }
 };
 
-const mapDispatchToProps = {
-  reset: resetAction
-};
+class Student extends React.Component {
+  componentDidMount() {
+    const { match, getStudentData } = this.props; // eslint-disable-line
+    getStudentData(match.params.id);
+  }
 
-const mapStateToProps = ({ student: { postSuccess, studentId } }) => {
-  return {
-    postSuccess,
-    studentId
-  };
-};
+  render() {
+    const {
+      studentData,
+      studentMatches,
+      checklist,
+      classes: { tagStyle, section }
+    } = this.props;
+    return (
+      <Grid item xs={10} sm={8} md={6}>
+        <h1>{studentData.name}</h1>
+        <div className={section}>
+          <Typography variant="overline" gutterBottom>
+            Industry
+          </Typography>
+          {studentData &&
+            studentData.industry &&
+            studentData.industry.map(tag => (
+              <Chip label={tag.label} key={tag.value} className={tagStyle} />
+            ))}
+        </div>
+        <div className={section}>
+          <Typography variant="overline" gutterBottom>
+            Tech
+          </Typography>
+          {studentData &&
+            studentData.tech &&
+            studentData.tech.map(tag => (
+              <Chip label={tag.label} key={tag.value} className={tagStyle} />
+            ))}
+        </div>
+        <Typography variant="overline" gutterBottom>
+          {studentMatches.length} Match
+          {studentMatches.length > 1 || studentMatches.length === 0 ? 'es' : null}
+        </Typography>
+        {studentMatches.map(match => (
+          <Link to={`/companies/${match.id}`} key={match.id}>
+            <Match match={match} total={checklist.length} />
+          </Link>
+        ))}
+      </Grid>
+    );
+  }
+}
+
+const mapStateToProps = ({ student, frontendData }) => ({
+  studentData: student.studentData,
+  studentMatches: student.studentMatches,
+  checklist: frontendData.checklist
+});
+
+const mapDispatchToProps = dispatch => ({
+  getStudentData: studentId => dispatch(getStudentData(studentId))
+});
+
+const StyledStudent = withStyles(styles)(Student);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Student);
+)(StyledStudent);

@@ -30,6 +30,7 @@ class Company extends React.Component {
 
   render() {
     const { companyData, checklist } = this.props;
+    const scorePercentage = Math.round((companyData.score / checklist.length) * 100);
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
@@ -41,7 +42,7 @@ class Company extends React.Component {
           ) : (
             <UncheckedParagraph text="Not Certified" />
           )}
-          <p>Score: {companyData.score}/10</p>
+          <p>Score: {scorePercentage}%</p>
         </Grid>
         <Divider variant="middle" style={{ margin: '1rem 2rem 2rem' }} />
         <div>

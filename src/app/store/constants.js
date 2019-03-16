@@ -15,6 +15,10 @@ export const RESET_STUDENT_DATA = 'RESET_STUDENT_DATA';
 export const GET_STUDENTS_SUCCESS = 'GET_STUDENTS_SUCCESS';
 export const GET_STUDENTS_FAILURE = 'GET_STUDENTS_FAILURE';
 
+export const GET_STUDENT_SUCCESS = 'GET_STUDENT_SUCCESS';
+export const GET_STUDENT_FAILURE = 'GET_STUDENT_FAILURE';
+export const GET_MATCHES = 'GET_MATCHES';
+
 export const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8081'
