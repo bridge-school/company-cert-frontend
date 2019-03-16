@@ -29,6 +29,7 @@ class Student extends React.Component {
     const {
       studentData,
       studentMatches,
+      checklist,
       classes: { tagStyle, section }
     } = this.props;
     return (
@@ -60,7 +61,7 @@ class Student extends React.Component {
         </Typography>
         {studentMatches.map(match => (
           <Link to={`/companies/${match.id}`} key={match.id}>
-            <Match match={match} />
+            <Match match={match} total={checklist.length} />
           </Link>
         ))}
       </Grid>
@@ -68,9 +69,10 @@ class Student extends React.Component {
   }
 }
 
-const mapStateToProps = ({ student }) => ({
+const mapStateToProps = ({ student, frontendData }) => ({
   studentData: student.studentData,
-  studentMatches: student.studentMatches
+  studentMatches: student.studentMatches,
+  checklist: frontendData.checklist
 });
 
 const mapDispatchToProps = dispatch => ({

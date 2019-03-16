@@ -30,7 +30,7 @@ class Company extends React.Component {
 
   render() {
     const { companyData, checklist } = this.props;
-    const scorePercentage = Math.round((companyData.score / 13) * 100);
+    const scorePercentage = Math.round((companyData.score / checklist.length) * 100);
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1 style={{ ...centerText, fontSize: '1rem' }}>Bridge Company Certification</h1>
