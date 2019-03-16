@@ -21,7 +21,6 @@ const uncheckedItems = (completeChecklist, uncheckedIds) =>
     : completeChecklist;
 
 const centerText = { textAlign: 'center' };
-const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
 class Company extends React.Component {
   componentDidMount() {
     const { match, getCompanyData } = this.props; // eslint-disable-line
