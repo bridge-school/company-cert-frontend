@@ -6,6 +6,16 @@ import Card from './Card';
 import { Link } from 'react-router-dom';
 import SecondaryNav from './SecondaryNav';
 
+const chooseRandomTags = (tagsArray, n) => {
+  // Shuffle array
+  const shuffled = tagsArray.sort(() => 0.5 - Math.random());
+
+  // Get sub-array of first n elements after shuffled
+  const selected = shuffled.slice(0, n);
+
+  return selected;
+};
+
 class Companies extends React.Component {
   componentDidMount() {
     const { getCompaniesData } = this.props;
@@ -21,7 +31,11 @@ class Companies extends React.Component {
           key={company.id}
           style={{ display: showOnlyCertified && company.score < 6 ? 'none' : 'block' }}
         >
-          <Card data={company} total={checklist.length} />
+          <Card
+            data={company}
+            tags={[...chooseRandomTags(company.tech, 3), ...chooseRandomTags(company.industry, 2)]}
+            total={checklist.length}
+          />
         </Link>
       );
     });

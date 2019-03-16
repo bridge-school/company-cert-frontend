@@ -18,7 +18,7 @@ class Students extends React.Component {
         <h1>Students</h1>
         {students.map(student => (
           <Link to={`/students/${student.id}`} key={student.id}>
-            <Card data={student} />
+            <Card data={student} tags={[...student.tech, ...student.industry]} />
           </Link>
         ))}
       </Grid>

@@ -17,7 +17,7 @@ const styles = {
   }
 };
 
-const Card = ({ data, total, classes }) => {
+const Card = ({ data, total, tags, classes }) => {
   return (
     <Paper className={classes.cardStyle} key={data.id}>
       <h3 className={total ? classes.margin5 : classes.margin10}>{data.name}</h3>
@@ -27,7 +27,7 @@ const Card = ({ data, total, classes }) => {
         </Typography>
       )}
       <div>
-        {[...data.industry, ...data.tech].map((tag, index) => (
+        {tags.map((tag, index) => (
           <Tag label={tag.label} key={index} />
         ))}
       </div>

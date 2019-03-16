@@ -52,7 +52,7 @@ class Student extends React.Component {
         </Typography>
         {studentMatches.map(match => (
           <Link to={`/companies/${match.id}`} key={match.id}>
-            <Card data={match} total={checklist.length} />
+            <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
           </Link>
         ))}
       </Grid>
