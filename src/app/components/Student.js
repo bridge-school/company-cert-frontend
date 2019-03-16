@@ -67,8 +67,7 @@ class Student extends React.Component {
 
 const mapStateToProps = ({ student }) => ({
   studentData: student.studentData,
-  studentMatches: student.studentMatches,
-  getSuccess: student.getSuccess
+  studentMatches: student.studentMatches
 });
 
 const mapDispatchToProps = dispatch => ({
