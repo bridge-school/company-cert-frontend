@@ -10,7 +10,9 @@ import CompanyChecklist from './CompanyChecklist';
 const CompanyChecklistWrapper = ({ checklistData }) => {
   return (
     <FormControl margin="normal" style={{ display: 'block' }}>
-      <FormLabel component="legend">Company Checklist</FormLabel>
+      <FormLabel component="legend" style={{ marginBottom: '15px' }}>
+        Company Checklist
+      </FormLabel>
       <FormGroup>
         {checklistData === undefined || checklistData.length === 0 ? (
           <p>Loading...</p>
