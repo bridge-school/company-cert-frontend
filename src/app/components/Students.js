@@ -5,6 +5,16 @@ import getStudentsData from '../store/actions/getStudentsData';
 import Card from './Card';
 import { Link } from 'react-router-dom';
 
+const chooseRandomTags = (tagsArray, n) => {
+  // Shuffle array
+  const shuffled = tagsArray.sort(() => 0.5 - Math.random());
+
+  // Get sub-array of first n elements after shuffled
+  const selected = shuffled.slice(0, n);
+
+  return selected;
+};
+
 class Students extends React.Component {
   componentDidMount() {
     const { getStudentsData } = this.props; // eslint-disable-line
@@ -18,7 +28,13 @@ class Students extends React.Component {
         <h1>Students</h1>
         {students.map(student => (
           <Link to={`/students/${student.id}`} key={student.id}>
-            <Card data={student} tags={[...student.tech, ...student.industry]} />
+            <Card
+              data={student}
+              tags={[
+                ...chooseRandomTags(student.tech, 3),
+                ...chooseRandomTags(student.industry, 2)
+              ]}
+            />
           </Link>
         ))}
       </Grid>
