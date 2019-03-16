@@ -9,6 +9,7 @@ const styles = {
   wrapper: {
     position: 'fixed',
     top: 55,
+    paddingTop: '10px',
     width: '100%',
     dropShadow: 'none',
     height: 100,
