@@ -19,18 +19,21 @@ const styles = {
   }
 };
 
-const Match = ({ match, classes: { matchStyle, tagStyle, h3 } }) => (
-  <Paper className={matchStyle} key={match.id}>
-    <h3 className={h3}>{match.name}</h3>
-    <Typography variant="overline" gutterBottom>
-      Score: {match.score}
-    </Typography>
-    <div>
-      {[...match.industry, ...match.tech].map((tag, index) => (
-        <Chip label={tag.label} className={tagStyle} key={index} />
-      ))}
-    </div>
-  </Paper>
-);
+const Match = ({ match, classes: { matchStyle, tagStyle, h3 } }) => {
+  const scorePercentage = Math.round((match.score / 13) * 100);
+  return (
+    <Paper className={matchStyle} key={match.id}>
+      <h3 className={h3}>{match.name}</h3>
+      <Typography variant="overline" gutterBottom>
+        Score: {scorePercentage}%
+      </Typography>
+      <div>
+        {[...match.industry, ...match.tech].map((tag, index) => (
+          <Chip label={tag.label} className={tagStyle} key={index} />
+        ))}
+      </div>
+    </Paper>
+  );
+};
 
 export default withStyles(styles)(Match);
