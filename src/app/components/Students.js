@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-
 import getStudentsData from '../store/actions/getStudentsData';
-import StudentCard from './StudentCard';
+import Card from './Card';
+import { Link } from 'react-router-dom';
 
 class Students extends React.Component {
   componentDidMount() {
@@ -14,10 +14,12 @@ class Students extends React.Component {
   render() {
     const { students } = this.props;
     return (
-      <Grid item xs={12} style={{ textAlign: 'center' }}>
+      <Grid item xs={10} sm={8} md={6}>
         <h1>Students</h1>
         {students.map(student => (
-          <StudentCard key={student.id} {...student} />
+          <Link to={`/students/${student.id}`}>
+            <Card key={student.id} data={student} />
+          </Link>
         ))}
       </Grid>
     );
