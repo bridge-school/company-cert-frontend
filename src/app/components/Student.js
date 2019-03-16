@@ -54,13 +54,12 @@ class Student extends React.Component {
             ))}
         </div>
         <Typography variant="overline" gutterBottom>
-          Matches
+          {studentMatches.length} Match
+          {studentMatches.length > 1 && studentMatches.length !== 0 ? 'es' : null}
         </Typography>
-        {studentMatches.length > 0 ? (
-          studentMatches.map(match => <Match key={match.id} match={match} />)
-        ) : (
-          <p>No matches.</p>
-        )}
+        {studentMatches.map(match => (
+          <Match key={match.id} match={match} />
+        ))}
       </Grid>
     );
   }
