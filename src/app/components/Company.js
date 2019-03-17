@@ -99,14 +99,12 @@ class Company extends React.Component {
           {companyMatches.length} Match
           {companyMatches.length > 1 || companyMatches.length === 0 ? 'es' : null}
         </Typography>
-        {
-          companyMatches.map(match => (
-            <Link to={`/students/${match.id}`} key={match.id}>
-              <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
-            </Link>
-          ))
-        }
-      </Grid >
+        {companyMatches.map(match => (
+          <Link to={`/students/${match.id}`} key={match.id}>
+            <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
+          </Link>
+        ))}
+      </Grid>
     );
   }
 }
