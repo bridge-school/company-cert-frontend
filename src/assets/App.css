@@ -3,6 +3,11 @@ a {
   color: inherit;
 }
 
+a h3 {
+  text-decoration: underline;
+  color: -webkit-link;
+}
+
 h1,
 h2,
 h3,
