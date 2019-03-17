@@ -21,10 +21,12 @@ const Card = ({ data, total, tags, classes }) => {
   return (
     <Paper className={classes.cardStyle} key={data.id}>
       <h3 className={total ? classes.margin5 : classes.margin10}>{data.name}</h3>
-      {total && (
+      {total ? (
         <Typography variant="overline" gutterBottom>
           Score: {Math.round((data.score / total) * 100)}%
         </Typography>
+      ) : (
+        ''
       )}
       <div>
         {tags.map((tag, index) => (
