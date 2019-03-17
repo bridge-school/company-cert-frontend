@@ -31,7 +31,7 @@ class Companies extends React.Component {
           key={company.id}
           style={{
             display:
-              showOnlyCertified && !(company.score / checklist.length > 0.6) ? 'none' : 'block'
+              showOnlyCertified && (company.score / checklist.length < 0.6) ? 'none' : 'block'
           }}
         >
           <Card
