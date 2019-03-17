@@ -1,21 +1,16 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Chip from '@material-ui/core/Chip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import getStudentData from '../store/actions/getStudentData';
-import Match from './Match';
+import Card from './Card';
+import Tag from './Tag';
 import { Link } from 'react-router-dom';
 
 const styles = {
   section: {
     marginBottom: 30
-  },
-  tagStyle: {
-    height: 25,
-    margin: '0 5px 5px 0',
-    backgroundColor: '#65B8DE'
   }
 };
 
@@ -30,7 +25,7 @@ class Student extends React.Component {
       studentData,
       studentMatches,
       checklist,
-      classes: { tagStyle, section }
+      classes: { section }
     } = this.props;
     return (
       <Grid item xs={10} sm={8} md={6}>
@@ -41,9 +36,7 @@ class Student extends React.Component {
           </Typography>
           {studentData &&
             studentData.industry &&
-            studentData.industry.map(tag => (
-              <Chip label={tag.label} key={tag.value} className={tagStyle} />
-            ))}
+            studentData.industry.map(tag => <Tag label={tag.label} key={tag.value} />)}
         </div>
         <div className={section}>
           <Typography variant="overline" gutterBottom>
@@ -51,9 +44,7 @@ class Student extends React.Component {
           </Typography>
           {studentData &&
             studentData.tech &&
-            studentData.tech.map(tag => (
-              <Chip label={tag.label} key={tag.value} className={tagStyle} />
-            ))}
+            studentData.tech.map(tag => <Tag label={tag.label} key={tag.value} />)}
         </div>
         <Typography variant="overline" gutterBottom>
           {studentMatches.length} Match
@@ -61,7 +52,7 @@ class Student extends React.Component {
         </Typography>
         {studentMatches.map(match => (
           <Link to={`/companies/${match.id}`} key={match.id}>
-            <Match match={match} total={checklist.length} />
+            <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
           </Link>
         ))}
       </Grid>

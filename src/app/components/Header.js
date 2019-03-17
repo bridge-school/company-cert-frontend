@@ -46,16 +46,16 @@ const ButtonAppBar = ({ classes: { grow, headerLogo } }) => {
           onClose={() => setAnchor(null)}
         >
           <Link to="/">
-            <MenuItem onClick={() => setAnchor(null)}>Add Company</MenuItem>
+            <MenuItem onClick={() => setAnchor(null)}>Add a company</MenuItem>
           </Link>
           <Link to="/companies">
-            <MenuItem onClick={() => setAnchor(null)}>Browse Companies</MenuItem>
+            <MenuItem onClick={() => setAnchor(null)}>Browse companies</MenuItem>
           </Link>
           <Link to="/student">
-            <MenuItem onClick={() => setAnchor(null)}>Add Student</MenuItem>
+            <MenuItem onClick={() => setAnchor(null)}>Add a student</MenuItem>
           </Link>
           <Link to="/students">
-            <MenuItem onClick={() => setAnchor(null)}>Students list</MenuItem>
+            <MenuItem onClick={() => setAnchor(null)}>Browse students</MenuItem>
           </Link>
         </Menu>
       </Toolbar>

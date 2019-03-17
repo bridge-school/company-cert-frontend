@@ -1,11 +1,11 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
-import Chip from '@material-ui/core/Chip';
 import { connect } from 'react-redux';
 import getCompanyData from '../store/actions/getCompanyData';
 import CheckedParagraph from './typography/CheckedParagraph';
 import UncheckedParagraph from './typography/UncheckedParagraph';
+import Tag from './Tag';
 
 // checkedItems and uncheckedItems are doing the exact opposite
 // checkedItems filters the complete list of checklist items and returns the ones that have been checked
@@ -21,7 +21,6 @@ const uncheckedItems = (completeChecklist, uncheckedIds) =>
     : completeChecklist;
 
 const centerText = { textAlign: 'center' };
-const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
 class Company extends React.Component {
   componentDidMount() {
     const { match, getCompanyData } = this.props; // eslint-disable-line
@@ -58,16 +57,12 @@ class Company extends React.Component {
         <div>
           {companyData &&
             companyData.industry &&
-            companyData.industry.map(tag => (
-              <Chip label={tag.label} key={tag.value} style={tagStyle} />
-            ))}
+            companyData.industry.map(tag => <Tag label={tag.label} key={tag.value} />)}
         </div>
         <div style={{ marginTop: '1rem' }}>
           {companyData &&
             companyData.tech &&
-            companyData.tech.map(tag => (
-              <Chip label={tag.label} key={tag.value} style={tagStyle} />
-            ))}
+            companyData.tech.map(tag => <Tag label={tag.label} key={tag.value} />)}
         </div>
       </Grid>
     );
