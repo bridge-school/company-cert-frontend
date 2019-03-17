@@ -3,14 +3,16 @@ import {
   POST_COMPANY_FAILURE,
   RESET_COMPANY_DATA,
   GET_COMPANY_DATA_SUCCESS,
-  GET_COMPANY_DATA_FAILURE
+  GET_COMPANY_DATA_FAILURE,
+  GET_COMPANY_MATCHES
 } from '../constants';
 
 const initialState = {
   postSuccess: false,
   getCompanySuccess: false,
   companyId: null,
-  companyData: {}
+  companyData: {},
+  companyMatches: []
 };
 
 const companyReducer = (state = initialState, { type, payload }) => {
@@ -40,6 +42,11 @@ const companyReducer = (state = initialState, { type, payload }) => {
         ...state,
         getCompanySuccess: false,
         companyData: null
+      };
+    case GET_COMPANY_MATCHES:
+      return {
+        ...state,
+        companyMatches: payload
       };
     default:
       return state;
