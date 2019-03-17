@@ -7,12 +7,12 @@ const validate = values => {
     }
   });
 
-  const minimumOneRequired = ['industry', 'tech']
+  const minimumOneRequired = ['industry', 'tech'];
   minimumOneRequired.forEach(field => {
     if (values[field] < 1) {
-      errors[field] = 'At least one item required'
+      errors[field] = 'At least one item required';
     }
-  })
+  });
   return errors;
 };
 
