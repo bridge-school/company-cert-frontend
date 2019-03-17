@@ -2,6 +2,7 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // Styles
 const tagStyle = { height: '25px', marginRight: '5px', backgroundColor: '#65B8DE' };
@@ -17,9 +18,9 @@ const chooseRandomTags = (tagsArray, n) => {
   return selected;
 };
 
-const CompanyCard = ({ id, name, industry, tech }) => {
+const CompanyCard = ({ id, name, industry, tech, score, showOnlyCertified }) => {
   return (
-    <div>
+    <div style={{ display: showOnlyCertified && score < 6 ? 'none' : 'block' }}>
       <h4 style={{ textAlign: 'center', margin: '0 0 20px' }}>
         <Link to={`/companies/${id}`}>{name}</Link>
       </h4>
@@ -27,7 +28,6 @@ const CompanyCard = ({ id, name, industry, tech }) => {
         {chooseRandomTags(tech, 3).map(tag => (
           <Chip label={tag.label} key={tag.value} style={tagStyle} />
         ))}
-
         {chooseRandomTags(industry, 2).map(tag => (
           <Chip label={tag.label} key={tag.value} style={tagStyle} />
         ))}
@@ -37,4 +37,8 @@ const CompanyCard = ({ id, name, industry, tech }) => {
   );
 };
 
-export default CompanyCard;
+const mapStateToProps = ({ companies: { showOnlyCertified } }) => ({
+  showOnlyCertified
+});
+
+export default connect(mapStateToProps)(CompanyCard);
