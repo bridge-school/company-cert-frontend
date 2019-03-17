@@ -188,7 +188,8 @@ const IntegrationReactSelect = ({ classes, theme, suggestions, label, input, met
           {...input}
           options={suggestions}
           components={components}
-          onBlur={e => e.preventDefault()}
+          blurInputOnSelect={false}
+          onBlur={() => input.onBlur([...input.value])}
           placeholder={''}
           isMulti
           meta={meta}
