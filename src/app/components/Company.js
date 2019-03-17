@@ -101,7 +101,7 @@ class Company extends React.Component {
         </Typography>
         {
           companyMatches.map(match => (
-            <Link to={`/student/${match.id}`} key={match.id}>
+            <Link to={`/students/${match.id}`} key={match.id}>
               <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
             </Link>
           ))
