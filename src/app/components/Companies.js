@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
 import getCompaniesData from '../store/actions/getCompaniesData';
 import Card from './Card';
-import { Link } from 'react-router-dom';
 import SecondaryNav from './SecondaryNav';
 
 const chooseRandomTags = (tagsArray, n) => {
@@ -27,9 +27,12 @@ class Companies extends React.Component {
     return companies.map(company => {
       return (
         <Link
-          to={`companies/${company.id}`}
+          to={`/companies/${company.id}`}
           key={company.id}
-          style={{ display: showOnlyCertified && company.score < 6 ? 'none' : 'block' }}
+          style={{
+            display:
+              showOnlyCertified && (company.score / checklist.length < 0.6) ? 'none' : 'block'
+          }}
         >
           <Card
             data={company}
