@@ -59,13 +59,14 @@ class Company extends React.Component {
     } = this.props;
     if (!getCompanySuccess) return <Error errorType="company" />;
     const scorePercentage = Math.round((companyData.score / checklist.length) * 100);
+
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1 className={subheading}>Bridge Company Certification</h1>
         <h2 className={centerText}>{companyData.name}</h2>
         <h3 className={subheading}> Company Status:</h3>
         <Grid container justify="space-between">
-          {companyData.score > 5 ? (
+          {scorePercentage > 60 ? (
             <CheckedParagraph text="Certified!" />
           ) : (
               <UncheckedParagraph text="Not Certified" />
@@ -99,18 +100,22 @@ class Company extends React.Component {
             companyData.tech &&
             companyData.tech.map(tag => <Tag label={tag.label} key={tag.value} />)}
         </div>
-        <Typography variant="overline" gutterBottom>
-          {companyMatches.length} Match
-          {companyMatches.length > 1 || companyMatches.length === 0 ? 'es' : null}
-        </Typography>
-        {getCompanyMatchesFailure ? (
-          <Error />
-        ) : (
-          companyMatches.map(match => (
-            <Link to={`/students/${match.id}`} key={match.id}>
-              <Card data={match} tags={[...match.tech, ...match.industry]} />
-            </Link>
-          ))
+        {scorePercentage > 60 && (
+          <div>
+            <Typography variant="overline" gutterBottom>
+              {companyMatches.length} Match
+              {companyMatches.length > 1 || companyMatches.length === 0 ? 'es' : null}
+            </Typography>
+            {getCompanyMatchesFailure ? (
+              <Error />
+            ) : (
+              companyMatches.map(match => (
+                <Link to={`/students/${match.id}`} key={match.id}>
+                  <Card data={match} tags={[...match.tech, ...match.industry]} />
+                </Link>
+              ))
+            )}
+          </div>
         )}
       </Grid>
     );
