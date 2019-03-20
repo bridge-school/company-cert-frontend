@@ -22,8 +22,12 @@ export const GET_STUDENT_SUCCESS = 'GET_STUDENT_SUCCESS';
 export const GET_STUDENT_FAILURE = 'GET_STUDENT_FAILURE';
 export const GET_MATCHES = 'GET_MATCHES';
 
+//
+
 // Global
 export const UPDATE_FRONTEND_DATA = 'UPDATE_FRONTEND_DATA';
+export const GET_FRONTEND_DATA_FAILURE = 'GET_FRONTEND_DATA_FAILURE';
+
 
 export const BASE_URL =
   process.env.NODE_ENV === 'development'

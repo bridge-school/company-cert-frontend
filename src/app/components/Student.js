@@ -30,7 +30,7 @@ class Student extends React.Component {
       getStudentSuccess,
       classes: { section }
     } = this.props;
-    if (!getStudentSuccess) return <Error />;
+    if (!getStudentSuccess) return <Error errorType="student" />;
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1>{studentData.name}</h1>

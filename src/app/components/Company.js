@@ -56,7 +56,7 @@ class Company extends React.Component {
       getCompanySuccess,
       classes: { section, centerText, subheading, divider }
     } = this.props;
-    if (!getCompanySuccess) return <Error />;
+    if (!getCompanySuccess) return <Error errorType="company" />;
     const scorePercentage = Math.round((companyData.score / checklist.length) * 100);
     return (
       <Grid item xs={10} sm={8} md={6}>
