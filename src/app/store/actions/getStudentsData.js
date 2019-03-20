@@ -34,7 +34,10 @@ const getStudentsData = () => dispatch => {
 
       return dispatch(getStudentsDataSuccessAction(students));
     })
-    .catch(error => dispatch(getStudentsDataFailureAction(error)));
+    .catch(error => {
+      console.log('Error GETting the student list: ', error);
+      dispatch(getStudentsDataFailureAction(error));
+    });
 };
 
 export default getStudentsData;

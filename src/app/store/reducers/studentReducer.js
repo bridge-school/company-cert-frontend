@@ -4,7 +4,8 @@ import {
   RESET_STUDENT_DATA,
   GET_STUDENT_SUCCESS,
   GET_STUDENT_FAILURE,
-  GET_MATCHES
+  GET_STUDENT_MATCHES,
+  GET_STUDENT_MATCHES_FAILURE
 } from '../constants';
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   getSuccess: false,
   studentId: null,
   studentData: {},
-  studentMatches: []
+  studentMatches: [],
+  getStudentMatchesFailure: false
 };
 
 const studentReducer = (state = initialState, { type, payload }) => {
@@ -43,10 +45,15 @@ const studentReducer = (state = initialState, { type, payload }) => {
         getSuccess: false,
         studentData: {}
       };
-    case GET_MATCHES:
+    case GET_STUDENT_MATCHES:
       return {
         ...state,
         studentMatches: payload
+      };
+    case GET_STUDENT_MATCHES_FAILURE:
+      return {
+        ...state,
+        getStudentMatchesFailure: true
       };
     default:
       return state;

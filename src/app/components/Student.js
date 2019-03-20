@@ -28,6 +28,7 @@ class Student extends React.Component {
       studentMatches,
       checklist,
       getStudentSuccess,
+      getMatchesFailure,
       classes: { section }
     } = this.props;
     if (!getStudentSuccess) return <Error errorType="student" />;
@@ -54,11 +55,19 @@ class Student extends React.Component {
           {studentMatches.length} Match
           {studentMatches.length > 1 || studentMatches.length === 0 ? 'es' : null}
         </Typography>
-        {studentMatches.map(match => (
-          <Link to={`/companies/${match.id}`} key={match.id}>
-            <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
-          </Link>
-        ))}
+        {getMatchesFailure ? (
+          <Error />
+        ) : (
+          studentMatches.map(match => (
+            <Link to={`/companies/${match.id}`} key={match.id}>
+              <Card
+                data={match}
+                total={checklist.length}
+                tags={[...match.tech, ...match.industry]}
+              />
+            </Link>
+          ))
+        )}
       </Grid>
     );
   }
@@ -68,6 +77,7 @@ const mapStateToProps = ({ student, frontendData }) => ({
   studentData: student.studentData,
   studentMatches: student.studentMatches,
   getStudentSuccess: student.getSuccess,
+  getMatchesFailure: student.getStudentMatchesFailure,
   checklist: frontendData.checklist
 });
 

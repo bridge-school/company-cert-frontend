@@ -54,6 +54,7 @@ class Company extends React.Component {
       checklist,
       companyMatches,
       getCompanySuccess,
+      getCompanyMatchesFailure,
       classes: { section, centerText, subheading, divider }
     } = this.props;
     if (!getCompanySuccess) return <Error errorType="company" />;
@@ -102,11 +103,19 @@ class Company extends React.Component {
           {companyMatches.length} Match
           {companyMatches.length > 1 || companyMatches.length === 0 ? 'es' : null}
         </Typography>
-        {companyMatches.map(match => (
-          <Link to={`/students/${match.id}`} key={match.id}>
-            <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
-          </Link>
-        ))}
+        {getCompanyMatchesFailure ? (
+          <Error />
+        ) : (
+          companyMatches.map(match => (
+            <Link to={`/students/${match.id}`} key={match.id}>
+              <Card
+                data={match}
+                total={checklist.length}
+                tags={[...match.tech, ...match.industry]}
+              />
+            </Link>
+          ))
+        )};
       </Grid>
     );
   }
@@ -117,7 +126,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = ({
-  company: { getCompanySuccess, companyData, companyId, companyMatches },
+  company: { getCompanySuccess, companyData, companyId, companyMatches, getCompanyMatchesFailure },
   frontendData: { checklist }
 }) => {
   return {
@@ -125,7 +134,8 @@ const mapStateToProps = ({
     companyData,
     companyId,
     checklist,
-    companyMatches
+    companyMatches,
+    getCompanyMatchesFailure
   };
 };
 

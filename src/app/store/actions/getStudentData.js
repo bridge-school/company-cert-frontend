@@ -1,4 +1,10 @@
-import { GET_STUDENT_SUCCESS, GET_STUDENT_FAILURE, BASE_URL, GET_MATCHES } from '../constants';
+import {
+  GET_STUDENT_SUCCESS,
+  GET_STUDENT_FAILURE,
+  BASE_URL,
+  GET_STUDENT_MATCHES,
+  GET_STUDENT_MATCHES_FAILURE
+} from '../constants';
 import matchStudentAndCompanies from '../../helpers';
 
 const getStudentSuccess = data => ({
@@ -12,7 +18,7 @@ const getStudentFailure = data => ({
 });
 
 const getMatches = data => ({
-  type: GET_MATCHES,
+  type: GET_STUDENT_MATCHES,
   payload: data
 });
 
@@ -26,6 +32,12 @@ const getStudentData = studentId => dispatch => {
         .then(companiesJson => {
           const companies = companiesJson.data;
           dispatch(getMatches(matchStudentAndCompanies(studentJson, companies)));
+        })
+        .catch(error => {
+          console.log('Error GETting the student matches: ', error);
+          dispatch({
+            type: GET_STUDENT_MATCHES_FAILURE
+          });
         });
     })
     .catch(error => {

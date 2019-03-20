@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import getStudentsData from '../store/actions/getStudentsData';
 import Card from './Card';
 import { Link } from 'react-router-dom';
+import Error from './ErrorPage';
 
 const chooseRandomTags = (tagsArray, n) => {
   // Shuffle array
@@ -22,7 +23,11 @@ class Students extends React.Component {
   }
 
   render() {
-    const { students } = this.props;
+    const { students, isLoaded, getSuccess } = this.props;
+    if (!isLoaded) return 'Loading...';
+    if (isLoaded && !getSuccess) {
+      return <Error errorType="students" />;
+    }
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1>Students</h1>
@@ -42,7 +47,11 @@ class Students extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({ students: state.students.studentsData });
+const mapStateToProps = state => ({
+  isLoaded: state.students.isLoaded,
+  getSuccess: state.students.getSuccess,
+  students: state.students.studentsData
+});
 
 const mapDispatchToProps = dispatch => ({ getStudentsData: () => dispatch(getStudentsData()) });
 

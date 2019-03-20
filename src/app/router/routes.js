@@ -4,6 +4,7 @@ import Company from '../components/Company';
 import StudentFormWrapper from '../components/StudentFormWrapper';
 import Students from '../components/Students';
 import Student from '../components/Student';
+import Error from '../components/ErrorPage';
 
 const routes = [
   {
@@ -33,6 +34,10 @@ const routes = [
     path: '/students/:id',
     exact: true,
     component: Student
+  },
+  {
+    path: '*',
+    component: Error
   }
 ];
 

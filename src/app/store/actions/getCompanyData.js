@@ -2,7 +2,8 @@ import {
   GET_COMPANY_DATA_SUCCESS,
   GET_COMPANY_DATA_FAILURE,
   BASE_URL,
-  GET_COMPANY_MATCHES
+  GET_COMPANY_MATCHES,
+  GET_COMPANY_MATCHES_ERROR
 } from '../constants';
 import matchCompanyAndStudents from '../../helpers';
 
@@ -30,6 +31,12 @@ const getCompanyData = companyId => dispatch => {
         .then(response => response.json())
         .then(studentsJson => {
           dispatch(getMatches(matchCompanyAndStudents(companyJson, studentsJson)));
+        })
+        .catch(error => {
+          console.log('Error GETting the company matches: ', error);
+          dispatch({
+            type: GET_COMPANY_MATCHES_ERROR
+          });
         });
     })
     .catch(error => {
