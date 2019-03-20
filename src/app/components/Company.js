@@ -11,6 +11,7 @@ import CheckedParagraph from './typography/CheckedParagraph';
 import UncheckedParagraph from './typography/UncheckedParagraph';
 import Tag from './Tag';
 import Card from './Card';
+import Error from './ErrorPage';
 
 // checkedItems and uncheckedItems are doing the exact opposite
 // checkedItems filters the complete list of checklist items and returns the ones that have been checked
@@ -52,8 +53,10 @@ class Company extends React.Component {
       companyData,
       checklist,
       companyMatches,
+      getCompanySuccess,
       classes: { section, centerText, subheading, divider }
     } = this.props;
+    if (!getCompanySuccess) return <Error />;
     const scorePercentage = Math.round((companyData.score / checklist.length) * 100);
     return (
       <Grid item xs={10} sm={8} md={6}>
@@ -64,8 +67,8 @@ class Company extends React.Component {
           {companyData.score > 5 ? (
             <CheckedParagraph text="Certified!" />
           ) : (
-            <UncheckedParagraph text="Not Certified" />
-          )}
+              <UncheckedParagraph text="Not Certified" />
+            )}
           <p>Score: {scorePercentage}%</p>
         </Grid>
         <Divider variant="middle" className={divider} />
