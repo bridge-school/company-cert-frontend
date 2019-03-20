@@ -34,7 +34,9 @@ class CompanyForm extends Component {
         />
 
         {getFrontendFailure ? (
-          <Error errorType="formList" />
+          <div style={{ margin: '30px 0' }}>
+            <Error errorType="formList" />
+          </div>
         ) : (
           <React.Fragment>
             <Field
