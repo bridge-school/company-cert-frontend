@@ -108,14 +108,10 @@ class Company extends React.Component {
         ) : (
           companyMatches.map(match => (
             <Link to={`/students/${match.id}`} key={match.id}>
-              <Card
-                data={match}
-                total={checklist.length}
-                tags={[...match.tech, ...match.industry]}
-              />
+              <Card data={match} tags={[...match.tech, ...match.industry]} />
             </Link>
           ))
-        )};
+        )}
       </Grid>
     );
   }
