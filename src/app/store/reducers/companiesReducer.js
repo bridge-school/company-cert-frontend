@@ -6,6 +6,7 @@ import {
 } from '../constants';
 
 const initialState = {
+  isLoaded: false,
   getCompaniesSuccess: false,
   data: [],
   showOnlyCertified: false
@@ -16,12 +17,14 @@ export default (state = initialState, { type, data }) => {
     case GET_COMPANIES_DATA_SUCCESS:
       return {
         ...state,
+        isLoaded: true,
         getCompaniesSuccess: true,
         data
       };
     case GET_COMPANIES_DATA_FAILURE:
       return {
         ...state,
+        isLoaded: true,
         getCompaniesSuccess: false,
         data: null
       };

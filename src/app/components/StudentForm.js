@@ -8,9 +8,10 @@ import InterviewDate from './form/InterviewDate';
 import Dropdown from './form/Dropdown';
 import validate from '../validations';
 import submitStudentForm from '../store/actions/submitStudentForm';
+import Error from './ErrorPage';
 
 const Student = props => {
-  const { industry, tech } = props;
+  const { industry, tech, getFrontendFailure } = props;
   const { handleSubmit, pristine, submitting, invalid } = props;
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
@@ -28,20 +29,28 @@ const Student = props => {
         id="student-interview-date"
         label="Interview Date"
       />
-      <Field
-        name="industry"
-        component={Dropdown}
-        label="Industry"
-        multi
-        suggestions={industry.map(item => ({ label: item.name, value: item.id }))}
-      />
-      <Field
-        name="tech"
-        component={Dropdown}
-        label="Technology"
-        multi
-        suggestions={tech.map(item => ({ label: item.name, value: item.id }))}
-      />
+      {getFrontendFailure ? (
+        <div style={{ margin: '30px 0' }}>
+          <Error errorType="formList" />
+        </div>
+      ) : (
+        <React.Fragment>
+          <Field
+            name="industry"
+            component={Dropdown}
+            label="Industry"
+            multi
+            suggestions={industry.map(item => ({ label: item.name, value: item.id }))}
+          />
+          <Field
+            name="tech"
+            component={Dropdown}
+            label="Technology"
+            multi
+            suggestions={tech.map(item => ({ label: item.name, value: item.id }))}
+          />
+        </React.Fragment>
+      )}
       <Button
         type="submit"
         variant="contained"
@@ -58,9 +67,10 @@ const onSubmit = (values, dispatch) => {
   dispatch(submitStudentForm(values));
 };
 
-const mapStateToProps = ({ frontendData: { tech, industry } }) => ({
+const mapStateToProps = ({ frontendData: { tech, industry, getFrontendFailure } }) => ({
   tech,
-  industry
+  industry,
+  getFrontendFailure
 });
 
 const studentReduxForm = reduxForm({
