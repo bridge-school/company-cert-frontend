@@ -9,8 +9,8 @@ import InterviewDate from '../components/form/InterviewDate';
 import CompanyChecklistWrapper from '../components/form/CompanyChecklistWrapper';
 import submitCompanyForm from '../store/actions/submitCompanyForm';
 import validate from '../validations';
-
 import Dropdown from '../components/form/Dropdown';
+import Error from '../components/ErrorPage';
 
 class CompanyForm extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class CompanyForm extends Component {
 
   render() {
     const { handleSubmit, pristine, submitting, invalid } = this.props;
-    const { checklist, industry, tech } = this.props;
+    const { checklist, industry, tech, getFrontendFailure } = this.props;
 
     return (
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -33,30 +33,37 @@ class CompanyForm extends Component {
           label="Interview Date"
         />
 
-        <Field
-          name="companyChecklist"
-          component={CompanyChecklistWrapper}
-          checklistData={checklist}
-        />
+        {getFrontendFailure ? (
+          <div style={{ margin: '30px 0' }}>
+            <Error errorType="formList" />
+          </div>
+        ) : (
+          <React.Fragment>
+            <Field
+              name="companyChecklist"
+              component={CompanyChecklistWrapper}
+              checklistData={checklist}
+            />
 
-        <Field
-          name="industry"
-          component={Dropdown}
-          label="Industry"
-          placeholder="Choose related industries"
-          multi
-          suggestions={industry.map(item => ({ label: item.name, value: item.id }))}
-        />
+            <Field
+              name="industry"
+              component={Dropdown}
+              label="Industry"
+              placeholder="Choose related industries"
+              multi
+              suggestions={industry.map(item => ({ label: item.name, value: item.id }))}
+            />
 
-        <Field
-          name="tech"
-          component={Dropdown}
-          label="Technology"
-          placeholder="Choose related technologies"
-          multi
-          suggestions={tech.map(item => ({ label: item.name, value: item.id }))}
-        />
-
+            <Field
+              name="tech"
+              component={Dropdown}
+              label="Technology"
+              placeholder="Choose related technologies"
+              multi
+              suggestions={tech.map(item => ({ label: item.name, value: item.id }))}
+            />
+          </React.Fragment>
+        )}
         <Button
           type="submit"
           variant="contained"
@@ -74,10 +81,11 @@ const onSubmit = (values, dispatch) => {
   dispatch(submitCompanyForm(values));
 };
 
-const mapStateToProps = ({ frontendData: { checklist, tech, industry } }) => ({
+const mapStateToProps = ({ frontendData: { checklist, tech, industry, getFrontendFailure } }) => ({
   checklist,
   tech,
-  industry
+  industry,
+  getFrontendFailure
 });
 
 CompanyForm = connect(mapStateToProps)(CompanyForm);

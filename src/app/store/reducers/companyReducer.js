@@ -4,7 +4,8 @@ import {
   RESET_COMPANY_DATA,
   GET_COMPANY_DATA_SUCCESS,
   GET_COMPANY_DATA_FAILURE,
-  GET_COMPANY_MATCHES
+  GET_COMPANY_MATCHES,
+  GET_COMPANY_MATCHES_ERROR
 } from '../constants';
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   getCompanySuccess: false,
   companyId: null,
   companyData: {},
-  companyMatches: []
+  companyMatches: [],
+  getCompanyMatchesFailure: false
 };
 
 const companyReducer = (state = initialState, { type, payload }) => {
@@ -47,6 +49,11 @@ const companyReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         companyMatches: payload
+      };
+    case GET_COMPANY_MATCHES_ERROR:
+      return {
+        ...state,
+        getCompanyMatchesFailure: true
       };
     default:
       return state;

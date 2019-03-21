@@ -1,12 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+
 import getStudentData from '../store/actions/getStudentData';
 import Card from './Card';
 import Tag from './Tag';
-import { Link } from 'react-router-dom';
+import Error from './ErrorPage';
 
 const styles = {
   section: {
@@ -25,8 +27,11 @@ class Student extends React.Component {
       studentData,
       studentMatches,
       checklist,
+      getStudentSuccess,
+      getMatchesFailure,
       classes: { section }
     } = this.props;
+    if (!getStudentSuccess) return <Error errorType="student" />;
     return (
       <Grid item xs={10} sm={8} md={6}>
         <h1>{studentData.name}</h1>
@@ -50,11 +55,19 @@ class Student extends React.Component {
           {studentMatches.length} Match
           {studentMatches.length > 1 || studentMatches.length === 0 ? 'es' : null}
         </Typography>
-        {studentMatches.map(match => (
-          <Link to={`/companies/${match.id}`} key={match.id}>
-            <Card data={match} total={checklist.length} tags={[...match.tech, ...match.industry]} />
-          </Link>
-        ))}
+        {getMatchesFailure ? (
+          <Error />
+        ) : (
+          studentMatches.map(match => (
+            <Link to={`/companies/${match.id}`} key={match.id}>
+              <Card
+                data={match}
+                total={checklist.length}
+                tags={[...match.tech, ...match.industry]}
+              />
+            </Link>
+          ))
+        )}
       </Grid>
     );
   }
@@ -63,6 +76,8 @@ class Student extends React.Component {
 const mapStateToProps = ({ student, frontendData }) => ({
   studentData: student.studentData,
   studentMatches: student.studentMatches,
+  getStudentSuccess: student.getSuccess,
+  getMatchesFailure: student.getStudentMatchesFailure,
   checklist: frontendData.checklist
 });
 

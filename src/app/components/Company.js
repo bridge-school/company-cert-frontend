@@ -11,6 +11,7 @@ import CheckedParagraph from './typography/CheckedParagraph';
 import UncheckedParagraph from './typography/UncheckedParagraph';
 import Tag from './Tag';
 import Card from './Card';
+import Error from './ErrorPage';
 
 // checkedItems and uncheckedItems are doing the exact opposite
 // checkedItems filters the complete list of checklist items and returns the ones that have been checked
@@ -52,8 +53,11 @@ class Company extends React.Component {
       companyData,
       checklist,
       companyMatches,
+      getCompanySuccess,
+      getCompanyMatchesFailure,
       classes: { section, centerText, subheading, divider }
     } = this.props;
+    if (!getCompanySuccess) return <Error errorType="company" />;
     const scorePercentage = Math.round((companyData.score / checklist.length) * 100);
 
     return (
@@ -65,8 +69,8 @@ class Company extends React.Component {
           {scorePercentage > 60 ? (
             <CheckedParagraph text="Certified!" />
           ) : (
-            <UncheckedParagraph text="Not Certified" />
-          )}
+              <UncheckedParagraph text="Not Certified" />
+            )}
           <p>Score: {scorePercentage}%</p>
         </Grid>
         <Divider variant="middle" className={divider} />
@@ -102,11 +106,15 @@ class Company extends React.Component {
               {companyMatches.length} Match
               {companyMatches.length > 1 || companyMatches.length === 0 ? 'es' : null}
             </Typography>
-            {companyMatches.map(match => (
-              <Link to={`/students/${match.id}`} key={match.id}>
-                <Card data={match} tags={[...match.tech, ...match.industry]} />
-              </Link>
-            ))}
+            {getCompanyMatchesFailure ? (
+              <Error />
+            ) : (
+              companyMatches.map(match => (
+                <Link to={`/students/${match.id}`} key={match.id}>
+                  <Card data={match} tags={[...match.tech, ...match.industry]} />
+                </Link>
+              ))
+            )}
           </div>
         )}
       </Grid>
@@ -119,7 +127,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = ({
-  company: { getCompanySuccess, companyData, companyId, companyMatches },
+  company: { getCompanySuccess, companyData, companyId, companyMatches, getCompanyMatchesFailure },
   frontendData: { checklist }
 }) => {
   return {
@@ -127,7 +135,8 @@ const mapStateToProps = ({
     companyData,
     companyId,
     checklist,
-    companyMatches
+    companyMatches,
+    getCompanyMatchesFailure
   };
 };
 

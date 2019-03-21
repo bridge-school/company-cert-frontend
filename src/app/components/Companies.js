@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import getCompaniesData from '../store/actions/getCompaniesData';
 import Card from './Card';
 import SecondaryNav from './SecondaryNav';
+import Error from './ErrorPage';
 
 const chooseRandomTags = (tagsArray, n) => {
   // Shuffle array
@@ -23,11 +24,15 @@ class Companies extends React.Component {
   }
 
   renderCompaniesList() {
-    const { companies, checklist, showOnlyCertified } = this.props;
+    const { companies, checklist, showOnlyCertified, isLoaded, getCompaniesSuccess } = this.props;
+    if (!isLoaded) return 'Loading...';
+    if (isLoaded && !getCompaniesSuccess) {
+      return <Error errorType="companies" />;
+    }
     return companies.map(company => {
       return (
         <Link
-          to={`companies/${company.id}`}
+          to={`/companies/${company.id}`}
           key={company.id}
           style={{
             display:
@@ -60,6 +65,8 @@ const mapStateToProps = state => {
   return {
     companies: state.companies.data,
     checklist: state.frontendData.checklist,
+    isLoaded: state.companies.isLoaded,
+    getCompaniesSuccess: state.companies.getCompaniesSuccess,
     showOnlyCertified: state.companies.showOnlyCertified
   };
 };
