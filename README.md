@@ -1,5 +1,8 @@
 ## Bridge Company Certification
-## Demo is runnign here: http://company-cert-frontend.bridgeschoolapp.io/
+
+Demo can be found here: http://company-cert-frontend.bridgeschoolapp.io/
+
+## Brief
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
